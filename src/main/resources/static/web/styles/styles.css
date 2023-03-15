@@ -1,0 +1,253 @@
+/* GLOBALES */
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-size: 1.6rem;
+    box-sizing: inherit;
+    color: white;
+    background-color: rgb(77, 75, 75);
+    font-family: 'PT Serif', sans-serif;
+}
+
+
+/* #app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+} */
+
+.contenedor {
+    margin: 0 auto;
+    max-width: 95%;
+}
+
+@media(min-width: 768px) {
+    .contenedor {
+        width: 1200px;
+    }
+}
+
+img {
+    max-width: 100%;
+}
+
+h1 {
+    font-size: 3.4rem;
+}
+
+h2 {
+    font-size: 3.2rem;
+}
+
+h3 {
+    font-size: 3rem;
+}
+
+h4 {
+    font-size: 2.8rem;
+}
+
+
+
+h1,
+h2,
+h3,
+h4 {
+    text-align: center;
+    font-weight:bold;
+    padding: 2rem 0;
+}
+
+h3,
+h4 {
+    text-transform: capitalize;
+}
+
+a {
+    font-size: 2rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    line-height: 2;
+}
+
+
+
+
+
+/************* MAIN PAGE *********************/
+
+
+
+
+
+/************* USER PRIVATE CHATS *********************/
+
+.userChats {
+    flex-basis: 15%;
+    height: 100vh;
+}
+
+.userChat {
+    background-color: purple;
+}
+
+.userChat__nickName {
+    text-align: center;
+}
+
+.userChat__nickName:hover {
+    cursor: pointer;
+}
+
+
+
+/************* MAIN-CHAT *********************/
+.main-chat-mainContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    background-color: red;
+}
+
+.main-chat-messages {
+    flex-basis: calc(70% - 2rem);
+    background-color: blue;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 2rem;
+
+}
+
+.main-chat-messages-header {
+    display: flex;
+    justify-content: center;
+}
+
+.mainChatMessages {
+    overflow-x: hidden;
+    overflow-y:auto;
+}
+
+.mainChatMessage {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mainChatMessage__messageDate {
+
+    flex-basis: auto;
+
+}
+.mainChatMessage__messageNick {
+
+    flex-basis: auto;
+
+}
+.mainChatMessage__message {
+    flex-basis: 70%;
+
+}
+
+
+.main-chat-messageForm {
+
+    padding: 2rem 0;
+}
+
+.main-chat-messageForm__textareaContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-chat-messageForm__textareaContainer__label {
+    flex-basis: calc(90% - 1rem);
+
+}
+
+.main-chat-messageForm__textareaContainer__textarea {
+    width: 100%;
+    height: 2rem;
+    padding: 1rem;
+    resize: none;
+}
+
+.main-chat-messageForm__textareaContainer__sendBtn {
+    background-color: blue;
+    color: white;
+    padding: 2rem;
+
+}
+
+.main-chat-messageForm__textareaContainer__sendBtn:hover {
+    cursor: pointer;
+}
+
+
+/************* MAIN-CHAT ASIDE*********************/
+
+
+.main-chat-aside {
+    flex-basis: 15%;
+    background-color: orange;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.usersOnlineContainer {
+    text-align: center;
+
+}
+
+.userOnline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: grey;
+    padding: 1rem;
+    
+}
+
+
+
+.fav-icon-def,
+.fav-icon-red,
+.chat-icon {
+    width: 2rem;
+    color: red;
+}
+
+.fav-icon-def:hover,
+.fav-icon-red:hover,
+.chat-icon:hover {
+    cursor: pointer;
+}
+
+.userOnline__icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

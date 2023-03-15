@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+
+    <div id="app">
+
+        <header>
+           
+        </header>
+
+
+        <main class="main-chat-mainContent">
+
+            
+            <div class="userChats">
+                <h2>Chats</h2>
+                <p @Click="openMainChat" class="userChat__nickName">Main Chat</p>
+                <h3>Private Chats</h3>
+                <div v-for="chat in userPrivateChats" class="userChat">
+                    <p @Click="openPrivateChat(chat)" class="userChat__nickName">{{chat.receiverNick}}</p>
+
+                </div>
+  
+            </div>
+
+            <section class="main-chat-messages contenedor">
+
+                <div class="main-chat-messages-header">
+              
+                    <h1 v-if="displayPrivateChat">Chat with {{receiverNick}}</h1>
+                    <h1 v-else>Main Lobby</h1>
+                    
+                </div>
+             
+
+                <div v-if="displayPrivateChat" class="mainChatMessages">
+                    <div v-for="messages in privateChatDisplayed" class="mainChatMessage">
+                        <p class="mainChatMessage__messageDate">{{messages.messageDate}}</p>
+                        <p v-if="messages.messageType === 'SENDER'" class="mainChatMessage__messageNick">You: </p>
+                        <p v-else class="mainChatMessage__messageNick">{{receiverNick}}: </p>
+               
+                        <p class="mainChatMessage__message">{{messages.message}}</p>
+                    </div>
+                    <div id="last_message" ref="lastMsg">
+        
+                    </div>
+                </div>
+
+                <div v-else class="mainChatMessages">
+
+           
+                
+                    <div v-for="message in generalChat" class="mainChatMessage">
+                        <p class="mainChatMessage__messageDate">{{message.messageDate}}</p>
+                        <p class="mainChatMessage__messageNick">{{message.nickName}}: </p>
+               
+                        <p class="mainChatMessage__message">{{message.message}}</p>
+
+                    </div>
+                    <div id="last_message" ref="lastMsg">
+        
+                    </div>
+  
+                </div>
+
+            
+
+                <form v-if="displayPrivateChat" class="main-chat-messageForm">
+                    <div class="main-chat-messageForm__textareaContainer">
+                        <label class="main-chat-messageForm__textareaContainer__label">
+                            <textarea class="main-chat-messageForm__textareaContainer__textarea" maxlength="255" v-model="userMessage"></textarea>
+                        </label>
+            
+
+                        <button class="main-chat-messageForm__textareaContainer__sendBtn" type="submit" @Click.prevent="sendMessage" id="">Send</button>
+                    </div>
+
+    
+                 
+                  
+                </form>
+
+                <form v-else class="main-chat-messageForm">
+                    <div class="main-chat-messageForm__textareaContainer">
+                        <label class="main-chat-messageForm__textareaContainer__label">
+                            <textarea class="main-chat-messageForm__textareaContainer__textarea" maxlength="255" v-model="userMessage"></textarea>
+                        </label>
+            
+
+                        <button href="#last_message"  class="main-chat-messageForm__textareaContainer__sendBtn" type="submit" @Click.prevent="sendMessage" id="">Send</button>
+                    </div>
+
+
+                 
+                  
+                </form>
+                
+
+            </section>
+
+
+            
+           
+            <aside class="main-chat-aside">
+                <h2>Online</h2>
+                <div class="usersOnlineContainer">
+                    <div v-for="client in clientsOnline" class="userOnline">
+            
+
+                        <p>{{client.nickName}}</p>
+                 
+                        <div v-if="client.id !== clientLogged.id" class="userOnline__icons">
+               
+                            
+                            <img v-if="client.friend == true" src="./images/fav-red-icon.png" alt="fav-red-icon" class="fav-icon-red userOnline__icon">
+                            <img v-else src="./images/fav-def-icon.png" alt="fav-def-icon" class="fav-icon-def userOnline__icon" @click="addFriend(client.id)">
+                       
+     
+                             
+                               
+                               <svg v-if="client.id !== clientLogged.id" @click="checkPrivateChat(client)" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message-circle chat-icon userOnline__icon" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                 <path d="M3 20l1.3 -3.9a9 8 0 1 1 3.4 2.9l-4.7 1" />
+                                 <line x1="12" y1="12" x2="12" y2="12.01" />
+                                 <line x1="8" y1="12" x2="8" y2="12.01" />
+                                 <line x1="16" y1="12" x2="16" y2="12.01" />
+                               </svg>
+                      
+                         
+                             
+                        </div>
+
+                </div>
+                </div>
+
+
+                
+            </aside>
+           
+    
+            
+        </main>
+      
+
+
+       
+    </div>
+    
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="./scripts/mainchat.js"></script>
+</html>

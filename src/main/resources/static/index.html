@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./web/styles/styles.css">
+</head>
+<body>
+
+    <div id="app">
+        <header>
+            <h1>Welcome to chatApp!</h1>
+    
+        </header>
+        
+    
+        <main>
+            <form action="" id="login-form">
+    
+                <label>
+                    <input type="email" v-model="loginEmail">
+                </label>
+                <label>
+                    <input type="password" v-model="loginPassword">
+                </label>
+    
+                <button @click.prevent="login()">Login</button>
+            </form>
+
+            <form action="" id="register-form">
+                <label>
+                    <input type="text" v-model="registerNick">
+                </label>
+                <label>
+                    <input type="email" v-model="registerEmail">
+                </label>
+                <label>
+                    <input type="password" v-model="registerPassword">
+                </label>
+    
+                <button @click.prevent="register()">Register</button>
+            </form>
+        </main>
+    </div>
+   
+</body>
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="./web/scripts/main.js"></script>
+</html>
