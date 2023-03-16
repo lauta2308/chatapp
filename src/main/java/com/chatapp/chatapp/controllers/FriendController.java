@@ -6,10 +6,7 @@ import com.chatapp.chatapp.services.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,4 +29,13 @@ public class FriendController {
         return friendService.addFriend(authentication, friendId);
 
     }
+
+
+    @DeleteMapping("/api/clients/current/removefriend")
+    public ResponseEntity<Object> removeFriend(Authentication authentication, @RequestParam Long friendId) {
+
+        return friendService.removeFriend(authentication, friendId);
+
+    }
+
 }

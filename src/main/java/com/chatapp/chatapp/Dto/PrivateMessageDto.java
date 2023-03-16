@@ -1,7 +1,9 @@
 package com.chatapp.chatapp.Dto;
 
 import com.chatapp.chatapp.models.PrivateMessage;
+import com.chatapp.chatapp.models.PrivateMessageStatus;
 import com.chatapp.chatapp.models.PrivateMessageType;
+import com.chatapp.chatapp.repositories.PrivateMessageRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +16,8 @@ public class PrivateMessageDto {
 
     private PrivateMessageType messageType;
 
+    private PrivateMessageStatus messageStatus;
+
     private String message;
 
 
@@ -21,6 +25,7 @@ public class PrivateMessageDto {
         this.id = privateMessage.getId();
         this.messageDate = privateMessage.getMessageDate();
         this.messageType = privateMessage.getMessageType();
+        this.messageStatus = privateMessage.getMessageStatus();
         this.message = privateMessage.getMessage();
     }
 
@@ -34,6 +39,10 @@ public class PrivateMessageDto {
 
     public PrivateMessageType getMessageType() {
         return messageType;
+    }
+
+    public PrivateMessageStatus getMessageStatus() {
+        return messageStatus;
     }
 
     public String getMessage() {

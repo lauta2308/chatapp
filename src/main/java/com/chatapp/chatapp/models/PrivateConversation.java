@@ -25,6 +25,8 @@ public class PrivateConversation {
 
     private LocalDateTime lastChange;
 
+
+
     @OneToMany(mappedBy="privateConversation", fetch=FetchType.EAGER)
     private Set<PrivateMessage> messages = new HashSet<>();;
 

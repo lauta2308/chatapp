@@ -31,11 +31,9 @@ public class FriendServiceImplementation implements FriendService {
             return false;
         }
 
-        Set<Friend> clientAuthFriends = clientAuth.getFriends();
+        Friend checkFriend = clientAuth.getFriends().stream().filter(friend -> friend.getFriendId() == friendId).findFirst().orElse(null);
 
-        Boolean checkFriend = clientAuthFriends.stream().filter(friend -> friend.getId() == friendId).findFirst().isPresent();
-
-        if(checkFriend == true){
+        if(checkFriend != null){
             return true;
         } else {
             return false;
@@ -46,37 +44,49 @@ public class FriendServiceImplementation implements FriendService {
     public ResponseEntity<Object> addFriend(Authentication authentication, Long friendId) {
         Client clientAuth = clientRepository.findByEmail(authentication.getName());
 
-
         if(clientAuth.getId() == friendId){
-            return new ResponseEntity<>("Cant add yourself as friend", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Unable to add yourself!", HttpStatus.FORBIDDEN);
         }
 
-        long clientFriend = clientRepository.findById(friendId).stream().count();
+        Client clientFriend = clientRepository.findById(friendId).orElse(null);
 
-        if(clientFriend == 0){
-            return new ResponseEntity<>("Friend id not valid", HttpStatus.FORBIDDEN);
+
+        if(clientFriend == null){
+            return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
         }
 
-        Set<Friend> clientFriends = clientAuth.getFriends();
 
-        long friendAlreadyExists = clientFriends.stream().filter(friend -> friend.getId() == friendId).count();
 
-        if(friendAlreadyExists > 0){
+        if(checkfriend(authentication, friendId) == true){
             return new ResponseEntity<>("Friend already added!", HttpStatus.FORBIDDEN);
         }
 
-        Client friend = clientRepository.findById(friendId).get();
 
-        Friend friend2to1 = new Friend(friend, FriendStatus.FRIEND);
-        clientAuth.getFriends().add(friend2to1);
-        friendRepository.save(friend2to1);
 
-        Friend friend1to2 = new Friend(clientAuth, FriendStatus.FRIEND);
-        friend.getFriends().add(friend1to2);
-        friendRepository.save(friend1to2);
-        clientRepository.save(clientAuth);
-        clientRepository.save(friend);
+            Friend friend = new Friend(clientAuth,friendId, FriendStatus.FRIEND);
+            friendRepository.save(friend);
 
-        return new ResponseEntity<>("Added to friendlist!", HttpStatus.CREATED);
+            clientAuth.getFriends().add(friend);
+
+            clientRepository.save(clientAuth);
+            return new ResponseEntity<>("Added to friendlist!", HttpStatus.CREATED);
+
+    }
+
+    @Override
+    public ResponseEntity<Object> removeFriend(Authentication authentication, Long friendId) {
+
+        Client clientAuth = clientRepository.findByEmail(authentication.getName());
+
+
+
+        if(checkfriend(authentication, friendId) == true){
+            Friend friend = friendRepository.findByClientAndFriendId(clientAuth, friendId);
+            friendRepository.delete(friend);
+            return new ResponseEntity<>("Friend deleted!", HttpStatus.CREATED);
+
+        } else {
+            return new ResponseEntity<>("Friend not found", HttpStatus.FORBIDDEN);
+        }
     }
 }

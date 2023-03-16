@@ -2,10 +2,7 @@ package com.chatapp.chatapp.services.implementations;
 
 
 import com.chatapp.chatapp.Dto.PrivateConversationDto;
-import com.chatapp.chatapp.models.Client;
-import com.chatapp.chatapp.models.PrivateConversation;
-import com.chatapp.chatapp.models.PrivateMessage;
-import com.chatapp.chatapp.models.PrivateMessageType;
+import com.chatapp.chatapp.models.*;
 import com.chatapp.chatapp.repositories.ClientRepository;
 import com.chatapp.chatapp.repositories.PrivateConversationRepository;
 import com.chatapp.chatapp.repositories.PrivateMessageRepository;
@@ -83,48 +80,7 @@ public class PrivateConversationImplementation implements PrivateConversationSer
     }
 
 
-    @Override
-    public ResponseEntity<Object> sendPrivateMessage(Authentication authentication, long receiverId, String message) {
 
-
-
-        Client clientAuth= clientRepository.findByEmail(authentication.getName());
-        Client receiverClient = clientRepository.findById(receiverId).orElse(null);
-
-        if(clientAuth.equals(receiverClient)){
-            return new ResponseEntity<>("Cant send message to yourself", HttpStatus.NOT_ACCEPTABLE);
-        }
-
-        PrivateConversation clientAuthtoReceiverChat = privateConversationRepository.findByClientAndReceiverId(clientAuth, receiverId);
-
-        PrivateConversation receiverClientToAuthChat = privateConversationRepository.findByClientAndReceiverId(receiverClient, clientAuth.getId());
-
-        if(clientAuthtoReceiverChat == null || receiverClientToAuthChat == null){
-            return new ResponseEntity<>("Chat not found", HttpStatus.FORBIDDEN);
-        }
-
-        clientAuthtoReceiverChat.setLastChange(LocalDateTime.now());
-        receiverClientToAuthChat.setLastChange(LocalDateTime.now());
-        PrivateMessage client1to2message = new PrivateMessage(LocalDateTime.now(), PrivateMessageType.SENDER, message);
-
-        PrivateMessage client2to1message = new PrivateMessage(LocalDateTime.now(), PrivateMessageType.RECEIVER, message);
-
-
-            client1to2message.setPrivateConversation(clientAuthtoReceiverChat);
-            client2to1message.setPrivateConversation(receiverClientToAuthChat);
-
-            privateMessageRepository.save(client1to2message);
-            privateMessageRepository.save(client2to1message);
-
-            privateConversationRepository.save(clientAuthtoReceiverChat);
-            privateConversationRepository.save(receiverClientToAuthChat);
-            return new ResponseEntity<>("Message sent", HttpStatus.CREATED);
-
-
-
-
-
-    }
 
 
 }

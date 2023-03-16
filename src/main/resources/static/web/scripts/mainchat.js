@@ -13,7 +13,8 @@ createApp({
         receiverId: "",
         receiverNick: "",
         newGeneralMessage: false,
-        privateChatDisplayed: []
+        privateChatArray: {},
+        privateChatDisplayed: [] //messages
 
 
       }},
@@ -25,6 +26,7 @@ createApp({
         setInterval(this.getGeneralChat, 1000);
         
         setInterval(this.getOnlineClients, 10000);
+        this.testPrivateChat();
         
         
    
@@ -35,7 +37,7 @@ createApp({
           axios.get('/api/clients/current').then(response => {
           
             this.clientLogged = response.data;
-
+       
   
 
          
@@ -90,6 +92,18 @@ createApp({
           })},
 
 
+          testPrivateChat(){
+            axios.get('/api/clients/current/getprivatechat' , {
+              params: { receiverId: 1}
+            }
+            
+            ).then(response => {
+              console.log(response.data);
+
+            })
+
+          },
+
 
         openPrivateChat(chat){
 
@@ -118,6 +132,7 @@ createApp({
              this.receiverNick = response.data.receiverNick;
           
             this.receiverId = response.data.receiverId;
+            this.privateChatArray = response.data;
             this.privateChatDisplayed = response.data.messages;
 
 
@@ -140,13 +155,18 @@ createApp({
           }).then(response => {
 
               this.scrollChatToView();
-            
+
+              console.log(this.privateChatArray);
+              axios.patch("/api/clients/current/readprivatemessages", 
+              `receiverId=${this.receiverId}`
+             
+              )
             
           
           })
 
         
-        ;
+      
 
           
         },
@@ -198,10 +218,9 @@ createApp({
         
           axios.get('/api/clients/onlineClients').then(response => {
 
-            if(response.data.length !== this.clientsOnline.length){
+           response.data.length !== this.clientsOnline.length
               this.clientsOnline = response.data;
-
-            }
+             
 
               this.clientsOnline.forEach(client => {
 
@@ -209,26 +228,23 @@ createApp({
                 axios.get('/api/clients/current/checkfriend' , {
                   params: { friendId: client.id }
                 }).then(response => {
-                  console.log(response.data);
+              
                   if(response.data === true){
-                    console.log("is friend")
+            
                     
                     
                     client.friend = true;
                   } else {
-                    console.log("not friend")
+             
                     client.friend = false;
                   }
                 })
 
+              })
 
-               
+
       
-              
-              }
-
-              )
-             
+    
             console.log(this.clientsOnline);
       
         
@@ -237,14 +253,26 @@ createApp({
           })},
 
           addFriend(clientId){
-           
+         
             axios.post('/api/clients/current/addfriend', `friendId=${clientId}`).then(response => {
-                console.log("friend added");
+         
   
   
     
   
       })},
+
+      deleteFriend(clientId){
+        axios.delete('/api/clients/current/removefriend', 
+        {
+          params: { friendId: clientId }
+        }).then(response => {
+  
+          
+
+        })
+        
+      },
          
 
 
@@ -252,22 +280,27 @@ createApp({
 
 
           sendMessage(){
+            
 
-            if(this.displayPrivateChat){
-              this.sendPrivateMessage()
+            if(this.userMessage.length > 0){
+              if(this.displayPrivateChat){
+                this.sendPrivateMessage()
+              }
+  
+              else {
+                this.sendGeneralMessage();
+              }
+  
             }
 
-            else {
-              this.sendGeneralMessage();
-            }
-
+           
 
           
             },
 
             
             sendPrivateMessage(){
-              if(this.userMessage !== ""){
+           
               
             
   
@@ -282,13 +315,12 @@ createApp({
                   this.openPrivateChat();
                     
                 })
-              }
+              
             },
 
 
             sendGeneralMessage(){
-
-              if(this.userMessage !== ""){
+            
         
             
   
@@ -302,7 +334,7 @@ createApp({
                    this.getGeneralChat()
                     
                 })
-              }
+              
 
             },
 

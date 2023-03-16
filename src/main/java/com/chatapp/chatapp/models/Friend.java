@@ -18,13 +18,16 @@ public class Friend {
     @JoinColumn(name="client_id")
     private Client client;
 
+    private long friendId;
+
     private FriendStatus friendStatus;
 
     public Friend() {
     }
 
-    public Friend(Client client, FriendStatus friendStatus) {
+    public Friend(Client client, long friendId, FriendStatus friendStatus) {
         this.client = client;
+        this.friendId = friendId;
         this.friendStatus = friendStatus;
     }
 
@@ -39,6 +42,14 @@ public class Friend {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public long getFriendId() {
+        return friendId;
+    }
+
+    public void setFriendId(long friendId) {
+        this.friendId = friendId;
     }
 
     public FriendStatus getFriendStatus() {

@@ -21,6 +21,8 @@ public class PrivateMessage {
 
     private PrivateMessageType messageType;
 
+    private PrivateMessageStatus messageStatus;
+
     private String message;
 
 
@@ -29,10 +31,11 @@ public class PrivateMessage {
     }
 
 
-    public PrivateMessage(LocalDateTime messageDate, PrivateMessageType messageType, String message) {
+    public PrivateMessage(LocalDateTime messageDate, PrivateMessageType messageType, PrivateMessageStatus messageStatus, String message) {
 
         this.messageDate = messageDate;
         this.messageType = messageType;
+        this.messageStatus = messageStatus;
         this.message = message;
     }
 
@@ -63,6 +66,14 @@ public class PrivateMessage {
 
     public void setMessageType(PrivateMessageType messageType) {
         this.messageType = messageType;
+    }
+
+    public PrivateMessageStatus getMessageStatus() {
+        return messageStatus;
+    }
+
+    public void setMessageStatus(PrivateMessageStatus messageStatus) {
+        this.messageStatus = messageStatus;
     }
 
     public String getMessage() {

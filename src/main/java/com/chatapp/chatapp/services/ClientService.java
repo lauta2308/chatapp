@@ -26,7 +26,7 @@ public interface ClientService {
     ResponseEntity<Object> clientLogoutStatus(Authentication authentication);
 
 
-    Set<ClientOnlineDto> getOnlineClients(Authentication authentication);
+    List<ClientOnlineDto> getOnlineClients(Authentication authentication);
 
 
     List<PrivateConversationDto> getCurrentPrivateConversations(Authentication authentication);

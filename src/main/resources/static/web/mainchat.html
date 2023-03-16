@@ -26,8 +26,9 @@
                 <h2>Chats</h2>
                 <p @Click="openMainChat" class="userChat__nickName">Main Chat</p>
                 <h3>Private Chats</h3>
-                <div v-for="chat in userPrivateChats" class="userChat">
-                    <p @Click="openPrivateChat(chat)" class="userChat__nickName">{{chat.receiverNick}}</p>
+                <div v-for="chat in userPrivateChats" class="userChat" @Click="openPrivateChat(chat)">
+                    <p  class="userChat__nickName">{{chat.receiverNick}}</p>
+                    <p  v-if="chat.unreadMessages > 0" class="userChat__unreadMessages">{{chat.unreadMessages}}</p>
 
                 </div>
   
@@ -78,11 +79,11 @@
                 <form v-if="displayPrivateChat" class="main-chat-messageForm">
                     <div class="main-chat-messageForm__textareaContainer">
                         <label class="main-chat-messageForm__textareaContainer__label">
-                            <textarea class="main-chat-messageForm__textareaContainer__textarea" maxlength="255" v-model="userMessage"></textarea>
+                            <textarea class="main-chat-messageForm__textareaContainer__textarea" maxlength="255" v-model="userMessage" @keydown.enter.prevent="sendMessage"></textarea>
                         </label>
             
 
-                        <button class="main-chat-messageForm__textareaContainer__sendBtn" type="submit" @Click.prevent="sendMessage" id="">Send</button>
+                        <button class="main-chat-messageForm__textareaContainer__sendBtn" type="submit" @Click.prevent="sendMessage" id="" >Send</button>
                     </div>
 
     
@@ -93,11 +94,11 @@
                 <form v-else class="main-chat-messageForm">
                     <div class="main-chat-messageForm__textareaContainer">
                         <label class="main-chat-messageForm__textareaContainer__label">
-                            <textarea class="main-chat-messageForm__textareaContainer__textarea" maxlength="255" v-model="userMessage"></textarea>
+                            <textarea class="main-chat-messageForm__textareaContainer__textarea" maxlength="255" v-model="userMessage" @keydown.enter.prevent="sendMessage"></textarea>
                         </label>
             
 
-                        <button href="#last_message"  class="main-chat-messageForm__textareaContainer__sendBtn" type="submit" @Click.prevent="sendMessage" id="">Send</button>
+                        <button href="#last_message"  class="main-chat-messageForm__textareaContainer__sendBtn" type="submit" @Click.prevent="sendMessage"  id="">Send</button>
                     </div>
 
 
@@ -122,7 +123,7 @@
                         <div v-if="client.id !== clientLogged.id" class="userOnline__icons">
                
                             
-                            <img v-if="client.friend == true" src="./images/fav-red-icon.png" alt="fav-red-icon" class="fav-icon-red userOnline__icon">
+                            <img v-if="client.friend == true" src="./images/fav-red-icon.png" alt="fav-red-icon" class="fav-icon-red userOnline__icon" @click="deleteFriend(client.id)">
                             <img v-else src="./images/fav-def-icon.png" alt="fav-def-icon" class="fav-icon-def userOnline__icon" @click="addFriend(client.id)">
                        
      

@@ -71,10 +71,15 @@ public class ClientServiceImplementation implements ClientService {
     }
 
     @Override
-    public Set<ClientOnlineDto> getOnlineClients(Authentication authentication) {
-     Set<Client> clientsOnline =  clientRepository.findAll().stream().filter(client -> client.getClientStatus() == ClientStatus.ONLINE).collect(Collectors.toSet());
+    public List<ClientOnlineDto> getOnlineClients(Authentication authentication) {
+     List<Client> clientsOnline =  clientRepository.findAll().stream().filter(client -> client.getClientStatus() == ClientStatus.ONLINE).collect(Collectors.toList());
 
-       return clientsOnline.stream().map(client -> new ClientOnlineDto(client)).collect(Collectors.toSet());
+
+     List<ClientOnlineDto> clientsOnlineDto = clientsOnline.stream().map(client -> new ClientOnlineDto(client)).collect(Collectors.toList());
+
+     clientsOnlineDto = clientsOnlineDto.stream().sorted(Comparator.comparing(ClientOnlineDto::getNickName).reversed())
+             .collect(Collectors.toList());
+       return clientsOnlineDto;
     }
 
     @Override

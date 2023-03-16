@@ -96,7 +96,7 @@ public class ClientController {
 
     @GetMapping("/api/clients/onlineClients")
 
-    public Set<ClientOnlineDto> getOnlineClients (Authentication authentication){
+    public List<ClientOnlineDto> getOnlineClients (Authentication authentication){
 
         return clientService.getOnlineClients(authentication);
 

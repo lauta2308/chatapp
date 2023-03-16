@@ -40,9 +40,5 @@ public class PrivateConversationController {
         }
 
 
-    @PostMapping("/api/clients/current/privatemessage")
-    public ResponseEntity<Object> sendprivatemessage(Authentication authentication, @RequestParam long receiverId,  @RequestParam String message){
 
-        return privateConversationService.sendPrivateMessage(authentication,receiverId, message);
-    }
 }

@@ -78,15 +78,13 @@ public class ChatappApplication {
 			generalChatRepository.save(generalChat3);
 
 
-			Friend friend2to1 = new Friend(client2, FriendStatus.FRIEND);
+			Friend friend2to1 = new Friend(client1,client2.getId(), FriendStatus.FRIEND);
 			client1.getFriends().add(friend2to1);
 			friendRepository.save(friend2to1);
 
-			Friend friend1to2 = new Friend(client1, FriendStatus.FRIEND);
-			client2.getFriends().add(friend1to2);
-			friendRepository.save(friend1to2);
+
 			clientRepository.save(client1);
-			clientRepository.save(client2);
+
 
 
 
@@ -102,9 +100,9 @@ public class ChatappApplication {
 
 			PrivateConversation client2to1chat = privateConversationRepository.findByClientAndReceiverId(client2, client1.getId());
 
-			PrivateMessage client1to2message = new PrivateMessage(LocalDateTime.now(), PrivateMessageType.SENDER, "message from client 1 to client 2");
+			PrivateMessage client1to2message = new PrivateMessage(LocalDateTime.now(), PrivateMessageType.SENDER, PrivateMessageStatus.NOT_READED, "message from client 1 to client 2");
 
-			PrivateMessage client2to1message = new PrivateMessage(LocalDateTime.now(), PrivateMessageType.RECEIVER, "message from client 1 to client 2");
+			PrivateMessage client2to1message = new PrivateMessage(LocalDateTime.now(), PrivateMessageType.RECEIVER,PrivateMessageStatus.NOT_READED, "message from client 1 to client 2");
 
 			client1to2message.setPrivateConversation(client1to2chat);
 			client2to1message.setPrivateConversation(client2to1chat);
@@ -132,9 +130,9 @@ public class ChatappApplication {
 
 			PrivateConversation client3to1chat = privateConversationRepository.findByClientAndReceiverId(client3, client1.getId());
 
-			PrivateMessage client1to3message = new PrivateMessage(LocalDateTime.now(), PrivateMessageType.SENDER, "message from client 1 to client 3");
+			PrivateMessage client1to3message = new PrivateMessage(LocalDateTime.now(), PrivateMessageType.SENDER,PrivateMessageStatus.NOT_READED, "message from client 1 to client 3");
 
-			PrivateMessage client3to1message = new PrivateMessage(LocalDateTime.now(), PrivateMessageType.RECEIVER, "message from client 1 to client 3");
+			PrivateMessage client3to1message = new PrivateMessage(LocalDateTime.now(), PrivateMessageType.RECEIVER,PrivateMessageStatus.NOT_READED, "message from client 1 to client 3");
 
 
 			client1to3message.setPrivateConversation(client1to3chat);

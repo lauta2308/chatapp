@@ -104,14 +104,26 @@ p {
 
 .userChat {
     background-color: purple;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    gap: .5rem;
+    text-align: center;
 }
 
 .userChat__nickName {
     text-align: center;
+    flex-basis: 80%;
 }
 
-.userChat__nickName:hover {
+.userChat:hover {
     cursor: pointer;
+}
+
+.userChat__unreadMessages{
+    color: red;
+    flex-basis: 20%;
 }
 
 
