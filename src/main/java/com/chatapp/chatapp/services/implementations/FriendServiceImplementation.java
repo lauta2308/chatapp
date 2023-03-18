@@ -23,20 +23,20 @@ public class FriendServiceImplementation implements FriendService {
     @Autowired
     FriendRepository friendRepository;
     @Override
-    public Boolean checkfriend(Authentication authentication, Long friendId) {
+    public FriendStatus checkfriend(Authentication authentication, Long friendId) {
 
         Client clientAuth = clientRepository.findByEmail(authentication.getName());
 
         if(clientAuth.getId() == friendId){
-            return false;
+            return FriendStatus.NOT_FRIEND;
         }
 
         Friend checkFriend = clientAuth.getFriends().stream().filter(friend -> friend.getFriendId() == friendId).findFirst().orElse(null);
 
         if(checkFriend != null){
-            return true;
+            return FriendStatus.FRIEND;
         } else {
-            return false;
+            return FriendStatus.NOT_FRIEND;
         }
     }
 
@@ -57,7 +57,7 @@ public class FriendServiceImplementation implements FriendService {
 
 
 
-        if(checkfriend(authentication, friendId) == true){
+        if(checkfriend(authentication, friendId) == FriendStatus.FRIEND){
             return new ResponseEntity<>("Friend already added!", HttpStatus.FORBIDDEN);
         }
 
@@ -80,7 +80,7 @@ public class FriendServiceImplementation implements FriendService {
 
 
 
-        if(checkfriend(authentication, friendId) == true){
+        if(checkfriend(authentication, friendId) == FriendStatus.FRIEND){
             Friend friend = friendRepository.findByClientAndFriendId(clientAuth, friendId);
             friendRepository.delete(friend);
             return new ResponseEntity<>("Friend deleted!", HttpStatus.CREATED);

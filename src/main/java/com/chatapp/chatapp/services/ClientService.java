@@ -1,13 +1,12 @@
 package com.chatapp.chatapp.services;
 
 import com.chatapp.chatapp.Dto.ClientDto;
-import com.chatapp.chatapp.Dto.ClientOnlineDto;
+import com.chatapp.chatapp.Dto.ChatClients;
 import com.chatapp.chatapp.Dto.PrivateConversationDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 
 import java.util.List;
-import java.util.Set;
 
 public interface ClientService {
 
@@ -26,11 +25,12 @@ public interface ClientService {
     ResponseEntity<Object> clientLogoutStatus(Authentication authentication);
 
 
-    List<ClientOnlineDto> getOnlineClients(Authentication authentication);
+    List<ChatClients> getChatClients(Authentication authentication);
 
 
     List<PrivateConversationDto> getCurrentPrivateConversations(Authentication authentication);
 
+    List<ChatClients> filterOnlineClients(Authentication authentication, String nickName, Boolean searchFriends);
 
 
 }

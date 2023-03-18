@@ -2,6 +2,7 @@ package com.chatapp.chatapp.controllers;
 
 
 import com.chatapp.chatapp.Dto.ClientDto;
+import com.chatapp.chatapp.models.FriendStatus;
 import com.chatapp.chatapp.services.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class FriendController {
     FriendService friendService;
 
     @GetMapping("/api/clients/current/checkfriend")
-    public Boolean checkfriend(Authentication authentication, @RequestParam Long friendId){
+    public FriendStatus checkfriend(Authentication authentication, @RequestParam Long friendId){
 
         return friendService.checkfriend(authentication, friendId);
     }

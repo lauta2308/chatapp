@@ -2,7 +2,7 @@ package com.chatapp.chatapp.controllers;
 
 
 import com.chatapp.chatapp.Dto.ClientDto;
-import com.chatapp.chatapp.Dto.ClientOnlineDto;
+import com.chatapp.chatapp.Dto.ChatClients;
 import com.chatapp.chatapp.Dto.PrivateConversationDto;
 import com.chatapp.chatapp.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 
 @RestController
@@ -91,17 +90,27 @@ public class ClientController {
 
 
 
+    @GetMapping("/api/clients/chatclients")
 
+    public List<ChatClients> getOnlineClients (Authentication authentication){
 
-
-    @GetMapping("/api/clients/onlineClients")
-
-    public List<ClientOnlineDto> getOnlineClients (Authentication authentication){
-
-        return clientService.getOnlineClients(authentication);
+        return clientService.getChatClients(authentication);
 
 
     }
+
+
+
+
+
+    @GetMapping("/api/clients/filterclients")
+    public List<ChatClients> filterClients(Authentication authentication, @RequestParam String nickName, @RequestParam  Boolean searchFriends){
+        return clientService.filterOnlineClients(authentication, nickName, searchFriends);
+
+
+    }
+
+
 
 
 }

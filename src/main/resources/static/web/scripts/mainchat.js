@@ -5,6 +5,8 @@ createApp({
     data() {
       return {
         generalChat: [],
+        searchUser: "",
+        searchFriends: "",
         clientsOnline: [],
         clientLogged: {},
         userMessage: "",
@@ -25,7 +27,7 @@ createApp({
       
         setInterval(this.getGeneralChat, 1000);
         
-        setInterval(this.getOnlineClients, 10000);
+        setInterval(this.getOnlineClients, 1000);
         this.testPrivateChat();
         
         
@@ -214,43 +216,78 @@ createApp({
       
       },
 
+      filterFriends(){
+
+        if(this.searchFriends){
+          this.searchFriends = false;
+        } else {
+          this.searchFriends = true;
+        }
+
+       
+      },
+
+    
+
         getOnlineClients() {
-        
-          axios.get('/api/clients/onlineClients').then(response => {
 
-           response.data.length !== this.clientsOnline.length
+          if(this.searchUser.length > 0 && this.searchFriends){
+            axios.get('/api/clients/filterclients' , {
+              params: { 
+                
+                nickName: this.searchUser,
+                searchFriends: this.searchFriends
+              }
+            }).then(response => {
               this.clientsOnline = response.data;
-             
+            })
+          }
 
-              this.clientsOnline.forEach(client => {
 
-
-                axios.get('/api/clients/current/checkfriend' , {
-                  params: { friendId: client.id }
-                }).then(response => {
+          else if(this.searchUser.length > 0){
+            axios.get('/api/clients/filterclients' , {
+              params: { 
+                nickName: this.searchUser,
+                searchFriends: this.searchFriends 
               
-                  if(response.data === true){
-            
-                    
-                    
-                    client.friend = true;
-                  } else {
-             
-                    client.friend = false;
-                  }
-                })
+              }
+            }).then(response => {
+              this.clientsOnline = response.data;
+            })
+          }
 
-              })
+          else if(this.searchFriends){
+            axios.get('/api/clients/filterclients' , {
+              params: { 
+                nickName: this.searchUser,
+                searchFriends: this.searchFriends 
+              
+              }
+            }).then(response => {
+              this.clientsOnline = response.data;
+            })
+          }
 
+          else {
+            axios.get('/api/clients/chatclients').then(response => {
 
-      
+              
+                this.clientsOnline = response.data;
+              
+           
+                
+
+            })
+          }
+        
+
     
             console.log(this.clientsOnline);
       
         
               
       
-          })},
+          },
 
           addFriend(clientId){
          

@@ -1,13 +1,15 @@
 package com.chatapp.chatapp.services.implementations;
 
 import com.chatapp.chatapp.Dto.ClientDto;
-import com.chatapp.chatapp.Dto.ClientOnlineDto;
+import com.chatapp.chatapp.Dto.ChatClients;
 import com.chatapp.chatapp.Dto.PrivateConversationDto;
 import com.chatapp.chatapp.models.Client;
 import com.chatapp.chatapp.models.ClientStatus;
-import com.chatapp.chatapp.models.PrivateConversation;
+import com.chatapp.chatapp.models.Friend;
+import com.chatapp.chatapp.models.FriendStatus;
 import com.chatapp.chatapp.repositories.ClientRepository;
 import com.chatapp.chatapp.services.ClientService;
+import com.chatapp.chatapp.services.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,9 @@ public class ClientServiceImplementation implements ClientService {
 
     @Autowired
     ClientRepository clientRepository;
+
+    @Autowired
+    FriendService friendService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -71,15 +76,19 @@ public class ClientServiceImplementation implements ClientService {
     }
 
     @Override
-    public List<ClientOnlineDto> getOnlineClients(Authentication authentication) {
-     List<Client> clientsOnline =  clientRepository.findAll().stream().filter(client -> client.getClientStatus() == ClientStatus.ONLINE).collect(Collectors.toList());
+    public List<ChatClients> getChatClients(Authentication authentication) {
+     List<Client> clients =  clientRepository.findAll();
+
+     List <ChatClients> chatClients = clients.stream().map(client ->
+
+         new ChatClients(client, friendService.checkfriend(authentication, client.getId()))
+
+     ).collect(Collectors.toList());
 
 
-     List<ClientOnlineDto> clientsOnlineDto = clientsOnline.stream().map(client -> new ClientOnlineDto(client)).collect(Collectors.toList());
-
-     clientsOnlineDto = clientsOnlineDto.stream().sorted(Comparator.comparing(ClientOnlineDto::getNickName).reversed())
+     chatClients = chatClients.stream().sorted(Comparator.comparing(ChatClients::getNickName).reversed())
              .collect(Collectors.toList());
-       return clientsOnlineDto;
+       return chatClients;
     }
 
     @Override
@@ -105,6 +114,48 @@ public class ClientServiceImplementation implements ClientService {
 
     }
 
+    @Override
+    public List<ChatClients> filterOnlineClients(Authentication authentication, String nickName, Boolean searchFriends) {
+
+        Client clientAuth = clientRepository.findByEmail(authentication.getName());
+        List<Client> allClients = clientRepository.findAll();
+        List<Friend> clientFriends = clientAuth.getFriends().stream().collect(Collectors.toList());
+        List<Client> clientsList = new ArrayList<>();
+        List<Friend> friendsList = new ArrayList<>();
+        List<ChatClients> chatClientsList = new ArrayList<>();
+
+        if(!nickName.isEmpty() && searchFriends.booleanValue() == true){
+
+
+         friendsList =  clientFriends.stream().filter(friend -> friend.getClient().getNickName().toLowerCase().contains(nickName.toLowerCase())).collect(Collectors.toList());
+
+
+
+            chatClientsList = friendsList.stream().map(friend ->
+
+
+                    new ChatClients(clientRepository.findById(friend.getId()), friendService.checkfriend(authentication, client.getId()))
+
+            ).collect(Collectors.toList());
+
+
+        }
+
+
+        List <ChatClients> chatClients = filterClients.stream().map(client ->
+
+                new ChatClients(client, friendService.checkfriend(authentication, client.getId()))
+
+        ).collect(Collectors.toList());
+
+
+        chatClients = chatClients.stream().sorted(Comparator.comparing(ChatClients::getNickName).reversed())
+                .collect(Collectors.toList());
+        return chatClients;
+
+
+
+    }
 
 
 }

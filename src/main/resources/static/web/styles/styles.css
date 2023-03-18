@@ -227,6 +227,10 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+
+        overflow-x: hidden;
+        overflow-y:auto;
+    
 }
 
 .usersOnlineContainer {
@@ -235,6 +239,8 @@ p {
 }
 
 .userOnline {
+    
+   
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -262,4 +268,5 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+ 
 }

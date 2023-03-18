@@ -24,7 +24,10 @@
             
             <div class="userChats">
                 <h2>Chats</h2>
-                <p @Click="openMainChat" class="userChat__nickName">Main Chat</p>
+                <div class="userChat" @Click="openMainChat">
+                    <p class="userChat__nickName">Main Chat</p>
+                </div>
+                
                 <h3>Private Chats</h3>
                 <div v-for="chat in userPrivateChats" class="userChat" @Click="openPrivateChat(chat)">
                     <p  class="userChat__nickName">{{chat.receiverNick}}</p>
@@ -113,17 +116,73 @@
             
            
             <aside class="main-chat-aside">
-                <h2>Online</h2>
+             
                 <div class="usersOnlineContainer">
-                    <div v-for="client in clientsOnline" class="userOnline">
+                    {{searchUser}}
+
+                    <div class="searchUsersContainer">
+                        <form>
+                            <label>
+                                <input type="text" v-model="searchUser" @keydown.enter.prevent placeholder="Search User">
+                            </label>
+                            <label>
+                                <img v-if="searchFriends == true" src="./images/fav-red-icon.png" alt="fav-red-icon" class="fav-icon-red userOnline__icon" @Click="filterFriends()">
+
+                                <img v-else src="./images/fav-def-icon.png" alt="fav-def-icon" class="fav-icon-def userOnline__icon" @Click="filterFriends()">
+                            </label>
+
+
+
+                        </form>
+                    </div>
+                    <h2>Online</h2>
+                    <div v-for="client in clientsOnline" >
             
 
-                        <p>{{client.nickName}}</p>
+                        <div v-if="client.clientStatus == 'ONLINE'" class="userOnline">
+                            <p>{{client.nickName}}</p>
                  
+
+                       
+                            <div v-if="client.id !== clientLogged.id" class="userOnline__icons">
+                   
+                                
+                                <img v-if="client.friendStatus == 'FRIEND'" src="./images/fav-red-icon.png" alt="fav-red-icon" class="fav-icon-red userOnline__icon" @click="deleteFriend(client.id)">
+                                <img v-else src="./images/fav-def-icon.png" alt="fav-def-icon" class="fav-icon-def userOnline__icon" @click="addFriend(client.id)">
+                           
+         
+                                 
+                                   
+                                   <svg v-if="client.id !== clientLogged.id" @click="checkPrivateChat(client)" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message-circle chat-icon userOnline__icon" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                     <path d="M3 20l1.3 -3.9a9 8 0 1 1 3.4 2.9l-4.7 1" />
+                                     <line x1="12" y1="12" x2="12" y2="12.01" />
+                                     <line x1="8" y1="12" x2="8" y2="12.01" />
+                                     <line x1="16" y1="12" x2="16" y2="12.01" />
+                                   </svg>
+                          
+                             
+                                 
+                            </div>
+                        </div>
+                     
+    
+                </div>
+
+               
+                </div>
+
+                <h2>Offline</h2>
+                <div v-for="client in clientsOnline" >
+            
+
+                    <div  v-if="client.clientStatus == 'OFFLINE'" class="userOnline">
+                        <p>{{client.nickName}}</p>
+             
                         <div v-if="client.id !== clientLogged.id" class="userOnline__icons">
                
-                            
-                            <img v-if="client.friend == true" src="./images/fav-red-icon.png" alt="fav-red-icon" class="fav-icon-red userOnline__icon" @click="deleteFriend(client.id)">
+                    
+                            <img v-if="client.friendStatus == 'FRIEND'" src="./images/fav-red-icon.png" alt="fav-red-icon" class="fav-icon-red userOnline__icon" @click="deleteFriend(client.id)">
                             <img v-else src="./images/fav-def-icon.png" alt="fav-def-icon" class="fav-icon-def userOnline__icon" @click="addFriend(client.id)">
                        
      
@@ -140,10 +199,10 @@
                          
                              
                         </div>
+                    </div>
+                 
 
-                </div>
-                </div>
-
+            </div>
 
                 
             </aside>
