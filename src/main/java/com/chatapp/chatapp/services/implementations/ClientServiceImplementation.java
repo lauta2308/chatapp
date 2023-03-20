@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ClientServiceImplementation implements ClientService {
@@ -117,41 +118,28 @@ public class ClientServiceImplementation implements ClientService {
     @Override
     public List<ChatClients> filterOnlineClients(Authentication authentication, String nickName, Boolean searchFriends) {
 
+
+        List<ChatClients> getChatClients = getChatClients(authentication);
         Client clientAuth = clientRepository.findByEmail(authentication.getName());
-        List<Client> allClients = clientRepository.findAll();
-        List<Friend> clientFriends = clientAuth.getFriends().stream().collect(Collectors.toList());
-        List<Client> clientsList = new ArrayList<>();
-        List<Friend> friendsList = new ArrayList<>();
+
         List<ChatClients> chatClientsList = new ArrayList<>();
 
         if(!nickName.isEmpty() && searchFriends.booleanValue() == true){
 
 
-         friendsList =  clientFriends.stream().filter(friend -> friend.getClient().getNickName().toLowerCase().contains(nickName.toLowerCase())).collect(Collectors.toList());
+            chatClientsList = getChatClients.stream().filter(chatClients -> chatClients.getNickName().contains(nickName) && chatClients.getFriendStatus() == FriendStatus.FRIEND).collect(Collectors.toList());
 
+        } else if (!nickName.isEmpty() && searchFriends.booleanValue() == false) {
+            chatClientsList = getChatClients.stream().filter(chatClients -> chatClients.getNickName().contains(nickName)).collect(Collectors.toList());
 
-
-            chatClientsList = friendsList.stream().map(friend ->
-
-
-                    new ChatClients(clientRepository.findById(friend.getId()), friendService.checkfriend(authentication, client.getId()))
-
-            ).collect(Collectors.toList());
-
-
+        } else {
+            chatClientsList = getChatClients.stream().filter(chatClients -> chatClients.getFriendStatus() == FriendStatus.FRIEND).collect(Collectors.toList());
         }
 
 
-        List <ChatClients> chatClients = filterClients.stream().map(client ->
-
-                new ChatClients(client, friendService.checkfriend(authentication, client.getId()))
-
-        ).collect(Collectors.toList());
-
-
-        chatClients = chatClients.stream().sorted(Comparator.comparing(ChatClients::getNickName).reversed())
+        chatClientsList = chatClientsList.stream().sorted(Comparator.comparing(ChatClients::getNickName).reversed())
                 .collect(Collectors.toList());
-        return chatClients;
+        return chatClientsList;
 
 
 

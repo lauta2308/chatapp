@@ -231,7 +231,7 @@ createApp({
 
         getOnlineClients() {
 
-          if(this.searchUser.length > 0 && this.searchFriends){
+          if(this.searchFriends){
             axios.get('/api/clients/filterclients' , {
               params: { 
                 
@@ -243,30 +243,7 @@ createApp({
             })
           }
 
-
-          else if(this.searchUser.length > 0){
-            axios.get('/api/clients/filterclients' , {
-              params: { 
-                nickName: this.searchUser,
-                searchFriends: this.searchFriends 
-              
-              }
-            }).then(response => {
-              this.clientsOnline = response.data;
-            })
-          }
-
-          else if(this.searchFriends){
-            axios.get('/api/clients/filterclients' , {
-              params: { 
-                nickName: this.searchUser,
-                searchFriends: this.searchFriends 
-              
-              }
-            }).then(response => {
-              this.clientsOnline = response.data;
-            })
-          }
+          
 
           else {
             axios.get('/api/clients/chatclients').then(response => {

@@ -1,8 +1,10 @@
 package com.chatapp.chatapp.models;
 
+import com.chatapp.chatapp.Dto.ClientDto;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Friend {
@@ -17,6 +19,7 @@ public class Friend {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id")
     private Client client;
+
 
     private long friendId;
 

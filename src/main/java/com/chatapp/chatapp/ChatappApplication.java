@@ -61,9 +61,29 @@ public class ChatappApplication {
 			clientRepository.save(client4);
 
 
-			Client client5 = new Client("Lauta2", "lauta@testing5.com", passwordEncoder.encode("12345"));
+			Client client5 = new Client("Lauta5", "lauta@testing5.com", passwordEncoder.encode("12345"));
 			client5.setClientStatus(ClientStatus.OFFLINE);
 			clientRepository.save(client5);
+
+			Client client6 = new Client("Lauta6", "lauta@testing6.com", passwordEncoder.encode("12345"));
+			client6.setClientStatus(ClientStatus.OFFLINE);
+			clientRepository.save(client6);
+
+			Client client7 = new Client("Lauta7", "lauta@testing7.com", passwordEncoder.encode("12345"));
+			client7.setClientStatus(ClientStatus.OFFLINE);
+			clientRepository.save(client7);
+
+			Client client8 = new Client("Lauta8", "lauta@testing8.com", passwordEncoder.encode("12345"));
+			client8.setClientStatus(ClientStatus.OFFLINE);
+			clientRepository.save(client8);
+
+			Client client9 = new Client("Lauta9", "lauta@testing9.com", passwordEncoder.encode("12345"));
+			client9.setClientStatus(ClientStatus.OFFLINE);
+			clientRepository.save(client9);
+
+			Client client10 = new Client("Lauta10", "lauta@testing10.com", passwordEncoder.encode("12345"));
+			client10.setClientStatus(ClientStatus.OFFLINE);
+			clientRepository.save(client10);
 
 			GeneralChat generalChat1 = new GeneralChat("first message!", LocalDateTime.now(),  client1);
 
