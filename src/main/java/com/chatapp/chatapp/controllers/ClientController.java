@@ -24,7 +24,7 @@ public class ClientController {
         return clientService.findAll();
     }
 
-    @GetMapping("/api/clients/{id}")
+    @GetMapping("/admin/clients/{id}")
     public ClientDto getClient(@PathVariable Long id){
 
 

@@ -1,7 +1,9 @@
 package com.chatapp.chatapp.configurations;
 
 import com.chatapp.chatapp.models.ClientRol;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 @EnableWebSecurity
 @Configuration
 public class WebAuthorization extends WebSecurityConfigurerAdapter {
@@ -21,7 +24,13 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
 
        http.authorizeRequests()
 
-                .antMatchers("/admin/**").permitAll();
+               .antMatchers(HttpMethod.POST, "/api/register", "/api/login").permitAll()
+
+               .antMatchers("/api/**").fullyAuthenticated()
+
+               .antMatchers("/rest/**").hasAuthority("ADMIN")
+
+                .antMatchers("/admin/**").hasAuthority("ADMIN");
 
 
 
