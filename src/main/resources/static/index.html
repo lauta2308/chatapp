@@ -20,32 +20,57 @@
         
     
         <main>
-            <form action="" id="login-form">
+            <form v-if="showLogInForm == true" id="login-form" class="index-form contenedor" ref="login-form">
     
-                <label>
-                    <input type="email" v-model="loginEmail">
+                <label class="index-form__label">Email
+                    <input type="email" v-model="loginEmail" placeholder="example@email.com" @keydown.enter.prevent="login()" @blur="checkLoginEmail()" @mouseenter="resetLoginEmailError()">
+                    <p class="index-form-error"> 
+                        {{errorLoginEmail}}
+                    </p>
+                  
                 </label>
-                <label>
-                    <input type="password" v-model="loginPassword">
+                <label class="index-form__label">Password
+                    <input type="password" v-model="loginPassword" placeholder="Password" @keydown.enter.prevent="login()"  @blur="checkLoginPassword()" @mouseenter="resetLoginPasswordError()">
+                    <p class="index-form-error"> 
+                        {{errorLoginPassword}}
+                    </p>
                 </label>
     
-                <button @click.prevent="login()">Login</button>
+                <p class="index-form-error">{{errorLogin}}</p>
+                <a @click.prevent="login()" class="index-form__btn">Login</a>
+                <p href="#">Not user? <a href="#" @click.prevent="displaySignUpForm()">Sign up</a> </p>
             </form>
 
-            <form action="" id="register-form">
-                <label>
-                    <input type="text" v-model="registerNick">
+            <form v-else id="register-form" class="index-form contenedor" ref="signup-form">
+                <label class="index-form__label">NickName
+                    <input type="text" v-model="registerNick" placeholder="Your Nickname" @keydown.enter.prevent="register()" @blur="checkRegisterNick()" @mouseenter="resetRegisterNickError()">
+                    <p class="index-form-error"> 
+                        {{errorNickName}}
+                    </p>
                 </label>
-                <label>
-                    <input type="email" v-model="registerEmail">
+                <label class="index-form__label">Email
+                    <input type="email" v-model="loginEmail" placeholder="Email" @keydown.enter.prevent="register()" @blur="checkLoginEmail()" @mouseenter="resetLoginEmailError()">
+                    <p class="index-form-error"> 
+                        {{errorLoginEmail}}
+                    </p>
                 </label>
-                <label>
-                    <input type="password" v-model="registerPassword">
+                <label class="index-form__label">Password
+                    <input type="password" v-model="loginPassword" placeholder="Password" @keydown.enter.prevent="register()" @blur="checkLoginPassword()" @mouseenter="resetLoginPasswordError()">
+                    <p class="index-form-error"> 
+                        {{errorLoginPassword}}
+                    </p>
                 </label>
     
-                <button @click.prevent="register()">Register</button>
+                <p class="index-form-error">{{errorLogin}}</p>
+                <a @click.prevent="register()" class="index-form__btn">Register</a>
+                
+                <p href="#">Already user? <a href="#" @click.prevent="displayLogInForm()">Log in</a> </p>
             </form>
         </main>
+
+        <footer>
+
+        </footer>
     </div>
    
 </body>

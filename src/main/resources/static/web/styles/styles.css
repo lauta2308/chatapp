@@ -78,6 +78,8 @@ h4 {
 
 a {
     font-size: 2rem;
+    text-decoration: none;
+    color: white;
 }
 
 p {
@@ -90,8 +92,37 @@ p {
 
 
 /************* INDEX *********************/
+.index-form {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.index-form__label input {
+
+    width: 100%;
+    padding: 1rem;
+}
+
+.index-form__btn {
+    width: 100%;
+    background-color: red;
+    text-align: center;
+
+    padding: 1rem;
+}
 
 
+.index-form__btn:hover {
+    cursor: pointer;
+}
+
+.index-form-error {
+
+    color: red;
+}
 
 /************* MAIN PAGE *********************/
 
