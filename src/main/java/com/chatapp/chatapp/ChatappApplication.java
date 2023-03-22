@@ -111,10 +111,10 @@ public class ChatappApplication {
 
 
 
-			PrivateConversation client1to2newchat = new PrivateConversation(client1, client2.getId(), client2.getNickName());
+			PrivateConversation client1to2newchat = new PrivateConversation(client1, client2.getId());
 			privateConversationRepository.save(client1to2newchat);
 
-			PrivateConversation client2to1newchat = new PrivateConversation(client2, client1.getId(), client1.getNickName());
+			PrivateConversation client2to1newchat = new PrivateConversation(client2, client1.getId());
 			privateConversationRepository.save(client2to1newchat);
 
 
@@ -141,10 +141,10 @@ public class ChatappApplication {
 
 
 
-			PrivateConversation client1to3newchat = new PrivateConversation(client1, client3.getId(), client3.getNickName());
+			PrivateConversation client1to3newchat = new PrivateConversation(client1, client3.getId());
 			privateConversationRepository.save(client1to3newchat);
 
-			PrivateConversation client3to1newchat = new PrivateConversation(client3, client1.getId(), client1.getNickName());
+			PrivateConversation client3to1newchat = new PrivateConversation(client3, client1.getId());
 			privateConversationRepository.save(client3to1newchat);
 
 

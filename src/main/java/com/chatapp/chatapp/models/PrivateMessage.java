@@ -1,5 +1,6 @@
 package com.chatapp.chatapp.models;
 
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 public class PrivateMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -39,48 +41,5 @@ public class PrivateMessage {
         this.message = message;
     }
 
-    public long getId() {
-        return id;
-    }
 
-
-    public PrivateConversation getPrivateConversation() {
-        return privateConversation;
-    }
-
-    public void setPrivateConversation(PrivateConversation privateConversation) {
-        this.privateConversation = privateConversation;
-    }
-
-    public LocalDateTime getMessageDate() {
-        return messageDate;
-    }
-
-    public void setMessageDate(LocalDateTime messageDate) {
-        this.messageDate = messageDate;
-    }
-
-    public PrivateMessageType getMessageType() {
-        return messageType;
-    }
-
-    public void setMessageType(PrivateMessageType messageType) {
-        this.messageType = messageType;
-    }
-
-    public PrivateMessageStatus getMessageStatus() {
-        return messageStatus;
-    }
-
-    public void setMessageStatus(PrivateMessageStatus messageStatus) {
-        this.messageStatus = messageStatus;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

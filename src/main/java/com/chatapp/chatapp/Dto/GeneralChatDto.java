@@ -1,9 +1,11 @@
 package com.chatapp.chatapp.Dto;
 
 import com.chatapp.chatapp.models.GeneralChat;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
+@Data
 public class GeneralChatDto {
 
     private long id;
@@ -25,19 +27,5 @@ public class GeneralChatDto {
         this.messageDate = generalChat.getMessageDate();
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public LocalDateTime getMessageDate() {
-        return messageDate;
-    }
 }

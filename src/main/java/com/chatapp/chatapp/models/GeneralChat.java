@@ -1,12 +1,14 @@
 package com.chatapp.chatapp.models;
 
 
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 public class GeneralChat {
 
     @Id
@@ -32,35 +34,5 @@ public class GeneralChat {
         this.client = client;
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public LocalDateTime getMessageDate() {
-        return messageDate;
-    }
-
-    public void setMessageDate(LocalDateTime messageDate) {
-        this.messageDate = messageDate;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
 }

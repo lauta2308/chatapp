@@ -57,10 +57,19 @@ public class ClientController {
 
     }
 
-    @PatchMapping("/api/clients/logout")
+    @PatchMapping("/api/clients/current/logout")
     public ResponseEntity<Object> clientLogoutStatus(Authentication authentication){
 
         return clientService.clientLogoutStatus(authentication);
+
+
+
+    }
+
+    @PatchMapping("/api/clients/current/nickname")
+    public ResponseEntity<Object> changeNickName(Authentication authentication, @RequestParam String nickName){
+
+        return clientService.changeNickName(authentication, nickName);
 
 
 

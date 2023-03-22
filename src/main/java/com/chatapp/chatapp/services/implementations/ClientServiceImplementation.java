@@ -50,7 +50,7 @@ public class ClientServiceImplementation implements ClientService {
     public ResponseEntity<Object> registerClient(String nickName, String email, String password) {
         Client client = new Client(nickName, email, passwordEncoder.encode(password));
         clientRepository.save(client);
-        return new ResponseEntity<>("Usuario creado con éxito", HttpStatus.CREATED);
+        return new ResponseEntity<>("User created", HttpStatus.CREATED);
     }
 
     @Override
@@ -102,6 +102,8 @@ public class ClientServiceImplementation implements ClientService {
 
         privateChatsList.addAll(clientDto.getPrivateConversations());
 
+        privateChatsList.stream().forEach(privateConversationDto -> privateConversationDto.setReceiverNick(getClientNickName(privateConversationDto.getReceiverId())));
+
         privateChatsList = privateChatsList
                 .stream()
                 .sorted(Comparator.comparing(PrivateConversationDto::getLastChange).reversed())
@@ -143,6 +145,27 @@ public class ClientServiceImplementation implements ClientService {
 
 
 
+    }
+
+    @Override
+    public ResponseEntity<Object> changeNickName(Authentication authentication, String nickName) {
+        Client clientAuth = clientRepository.findByEmail(authentication.getName());
+
+        if(clientAuth == null){
+            return new ResponseEntity<>("User not found", HttpStatus.FORBIDDEN);
+        }
+
+        
+        clientAuth.setNickName(nickName);
+        clientRepository.save(clientAuth);
+        return new ResponseEntity<>("NickName changed", HttpStatus.CREATED);
+
+
+    }
+
+    @Override
+    public String getClientNickName(long receiverId) {
+        return clientRepository.findById(receiverId).get().getNickName();
     }
 
 

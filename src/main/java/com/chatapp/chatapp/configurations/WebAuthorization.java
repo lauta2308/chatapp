@@ -26,6 +26,8 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
 
                .antMatchers(HttpMethod.POST, "/api/register", "/api/login").permitAll()
 
+               .antMatchers("/web/mainchat.html").fullyAuthenticated()
+
                .antMatchers("/api/**").fullyAuthenticated()
 
                .antMatchers("/rest/**").hasAuthority("ADMIN")

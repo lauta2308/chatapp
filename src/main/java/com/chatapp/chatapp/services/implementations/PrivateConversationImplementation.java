@@ -6,6 +6,7 @@ import com.chatapp.chatapp.models.*;
 import com.chatapp.chatapp.repositories.ClientRepository;
 import com.chatapp.chatapp.repositories.PrivateConversationRepository;
 import com.chatapp.chatapp.repositories.PrivateMessageRepository;
+import com.chatapp.chatapp.services.ClientService;
 import com.chatapp.chatapp.services.PrivateConversationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,8 @@ public class PrivateConversationImplementation implements PrivateConversationSer
 
     @Autowired
     PrivateMessageRepository privateMessageRepository;
+
+
 
 
     @Override
@@ -57,6 +60,10 @@ public class PrivateConversationImplementation implements PrivateConversationSer
         PrivateConversation privateConversation = privateConversationRepository.findByClientAndReceiverId(clientAuth, receiverId);
 
 
+        PrivateConversationDto privateConversationDto = new PrivateConversationDto(privateConversation
+        );
+
+        privateConversationDto.setReceiverNick(receiver.getNickName());
             return new PrivateConversationDto(privateConversation) ;
 
 
@@ -71,9 +78,9 @@ public class PrivateConversationImplementation implements PrivateConversationSer
         if(clientAuth.getId() == receiverId){
             return new ResponseEntity<>("Unable to chat yourself", HttpStatus.NOT_ACCEPTABLE);
         } else {
-            privateConversationRepository.save(new PrivateConversation(clientAuth, receiverClient.getId(), receiverClient.getNickName(), LocalDateTime.now()));
+            privateConversationRepository.save(new PrivateConversation(clientAuth, receiverClient.getId(), LocalDateTime.now()));
 
-            privateConversationRepository.save(new PrivateConversation(receiverClient, clientAuth.getId(), clientAuth.getNickName(), LocalDateTime.now()));
+            privateConversationRepository.save(new PrivateConversation(receiverClient, clientAuth.getId(), LocalDateTime.now()));
 
             return new ResponseEntity<>("Chat created", HttpStatus.CREATED);
         }

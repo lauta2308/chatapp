@@ -33,4 +33,7 @@ public interface ClientService {
     List<ChatClients> filterOnlineClients(Authentication authentication, String nickName, Boolean searchFriends);
 
 
+    ResponseEntity<Object> changeNickName(Authentication authentication, String nickName);
+
+    String getClientNickName(long receiverId);
 }

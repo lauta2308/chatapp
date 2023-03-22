@@ -3,11 +3,11 @@ package com.chatapp.chatapp.Dto;
 import com.chatapp.chatapp.models.PrivateMessage;
 import com.chatapp.chatapp.models.PrivateMessageStatus;
 import com.chatapp.chatapp.models.PrivateMessageType;
-import com.chatapp.chatapp.repositories.PrivateMessageRepository;
+import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Data
 public class PrivateMessageDto {
 
     private long id;
@@ -29,23 +29,5 @@ public class PrivateMessageDto {
         this.message = privateMessage.getMessage();
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public LocalDateTime getMessageDate() {
-        return messageDate;
-    }
-
-    public PrivateMessageType getMessageType() {
-        return messageType;
-    }
-
-    public PrivateMessageStatus getMessageStatus() {
-        return messageStatus;
-    }
-
-    public String getMessage() {
-        return message;
-    }
 }

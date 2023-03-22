@@ -1,9 +1,13 @@
 
+
+
 const { createApp } = Vue
+
 
 createApp({
     data() {
       return {
+        newNickName: "",
         generalChat: [],
         searchUser: "",
         searchFriends: "",
@@ -35,6 +39,44 @@ createApp({
 
       },
       methods: {
+        logout(){
+
+          axios.patch("/api/clients/current/logout").then(response => {
+            axios.post("/api/logout").then(response =>
+              {
+                window.location.href="../index.html";
+              })
+          })
+        },
+        showUserList(){
+
+          this.$refs.userList.style.display = "block";
+        },
+
+        hideUserList(){
+          this.$refs.userList.style.display = "none";
+        },
+
+        showNickForm(){
+          this.$refs.nickForm.style.display = "flex";
+        },
+        hideNickForm(){
+          this.$refs.nickForm.style.display = "none";
+        },
+
+        changeNickName(){
+
+          console.log(this.newNickName);
+          if(this.newNickName.length > 0){
+
+            axios.patch('/api/clients/current/nickname', `nickName=${this.newNickName}`).then(response => {
+                console.log("name changed...")
+              
+    
+            })
+          }
+
+        },
         getCurrentClient(){
           axios.get('/api/clients/current').then(response => {
           
@@ -56,7 +98,7 @@ createApp({
         
 
         this.userPrivateChats = response.data;
-            
+   
   
        
   
@@ -100,7 +142,7 @@ createApp({
             }
             
             ).then(response => {
-              console.log(response.data);
+  
 
             })
 
@@ -158,7 +200,7 @@ createApp({
 
               this.scrollChatToView();
 
-              console.log(this.privateChatArray);
+   
               axios.patch("/api/clients/current/readprivatemessages", 
               `receiverId=${this.receiverId}`
              
@@ -259,7 +301,7 @@ createApp({
         
 
     
-            console.log(this.clientsOnline);
+     
       
         
               

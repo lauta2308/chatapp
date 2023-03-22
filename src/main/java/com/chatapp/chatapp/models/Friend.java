@@ -1,12 +1,14 @@
 package com.chatapp.chatapp.models;
 
 import com.chatapp.chatapp.Dto.ClientDto;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Data
 public class Friend {
 
     @Id
@@ -34,32 +36,5 @@ public class Friend {
         this.friendStatus = friendStatus;
     }
 
-    public long getId() {
-        return id;
-    }
 
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public long getFriendId() {
-        return friendId;
-    }
-
-    public void setFriendId(long friendId) {
-        this.friendId = friendId;
-    }
-
-    public FriendStatus getFriendStatus() {
-        return friendStatus;
-    }
-
-    public void setFriendStatus(FriendStatus friendStatus) {
-        this.friendStatus = friendStatus;
-    }
 }

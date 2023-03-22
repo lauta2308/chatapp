@@ -14,8 +14,45 @@
 
     <div id="app">
 
-        <header>
-           
+        <div class="new-nick-container" ref="nickForm"  @focusout="hideNickForm"
+        tabindex="0">
+            <form class="nick-form">
+                <label>
+                    <input type="text" placeholder="New nick..." v-model="newNickName" class="nick-form-input">
+                </label>
+                <button type="submit" @click.prevent="changeNickName" class="nick-form-button">SAVE</button>
+            </form>
+        </div>
+
+        <header class="header">
+           <div class="top-bar">
+
+            <div class="top-bar__settings">
+                <a href="#">Settings</a>
+            </div>
+            <div class="top-bar__color--container">
+  
+                <div class="textColor__red selectColor"></div>
+                <div class="textColor__blue selectColor"></div>
+                <div class="textColor__yellow selectColor"></div>
+                <div class="textColor__green selectColor"></div>
+                <div class="textColor__brown selectColor"></div>
+                <div class="textColor__orange selectColor"></div>
+                <div class="textColor__teal selectColor"></div>
+                <div class="textColor__grey selectColor"></div>
+            </div>
+            <div class="top-bar__user" @mouseenter="showUserList()" @mouseleave="hideUserList()">
+                <a class="top-bar__user--nick">{{clientLogged.nickName}}</a>
+                <ul class="top-bar__user--list" ref="userList">
+                 
+                    <li class="top-bar__user--list-item top-bar__user--changeNick" @click="showNickForm">Change Nick</li>
+                    <li class="top-bar__user--list-item top-bar__user--logout" @click="logout">Log out</li>
+                </ul>
+                
+
+
+             </div>
+           </div>
         </header>
 
 
@@ -210,6 +247,10 @@
     
             
         </main>
+
+        <footer class="footer">
+            <p>Chat app</p>
+        </footer>
       
 
 
@@ -220,4 +261,5 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="./scripts/mainchat.js"></script>
+
 </html>

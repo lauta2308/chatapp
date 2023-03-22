@@ -1,12 +1,14 @@
 package com.chatapp.chatapp.Dto;
 
-import com.chatapp.chatapp.models.*;
+import com.chatapp.chatapp.models.Client;
+import com.chatapp.chatapp.models.ClientRol;
+import com.chatapp.chatapp.models.ClientStatus;
+import lombok.Data;
 
-
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Data
 public class ClientDto {
 
     private long id;
@@ -35,32 +37,4 @@ public class ClientDto {
         this.clientStatus = client.getClientStatus();
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public ClientRol getClientRol() {
-        return clientRol;
-    }
-
-    public Set<FriendDto> getFriends() {
-        return friends;
-    }
-
-    public Set<GeneralChatDto> getGeneralMessages() {
-        return generalMessages;
-    }
-
-
-    public Set<PrivateConversationDto> getPrivateConversations() {
-        return privateConversations;
-    }
-
-    public ClientStatus getClientStatus() {
-        return clientStatus;
-    }
 }

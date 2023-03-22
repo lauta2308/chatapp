@@ -2,7 +2,9 @@ package com.chatapp.chatapp.Dto;
 
 import com.chatapp.chatapp.models.Friend;
 import com.chatapp.chatapp.models.FriendStatus;
+import lombok.Data;
 
+@Data
 public class FriendDto {
 
     private long id;
@@ -19,15 +21,5 @@ public class FriendDto {
         this.friendStatus = friend.getFriendStatus();
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public long getFriendId() {
-        return friendId;
-    }
-
-    public FriendStatus getFriendStatus() {
-        return friendStatus;
-    }
 }
