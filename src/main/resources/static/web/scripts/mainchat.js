@@ -151,7 +151,7 @@ createApp({
 
         openPrivateChat(chat){
 
-      
+          
           if(chat){
             if(chat.receiverId > 0){
               this.receiverId = chat.receiverId;
@@ -163,7 +163,7 @@ createApp({
            }
           }
           
-
+          console.log(chat);
           axios.get('/api/clients/current/getprivatechat' , {
             params: { receiverId: this.receiverId }
           }
@@ -171,7 +171,7 @@ createApp({
           ).then(response => {
 
 
-          
+            console.log(response);
             this.displayPrivateChat = true;
              this.receiverNick = response.data.receiverNick;
           

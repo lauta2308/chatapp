@@ -57,6 +57,7 @@
 
 
         <main class="main-chat-mainContent">
+        
 
             
             <div class="userChats">
@@ -67,6 +68,7 @@
                 
                 <h3>Private Chats</h3>
                 <div v-for="chat in userPrivateChats" class="userChat" @Click="openPrivateChat(chat)">
+                 
                     <p  class="userChat__nickName">{{chat.receiverNick}}</p>
                     <p  v-if="chat.unreadMessages > 0" class="userChat__unreadMessages">{{chat.unreadMessages}}</p>
 
@@ -158,11 +160,11 @@
                     {{searchUser}}
 
                     <div class="searchUsersContainer">
-                        <form>
-                            <label>
+                        <form class="searchUsersForm">
+                            <label class="searchUsersForm__label--search">
                                 <input type="text" v-model="searchUser" @keydown.enter.prevent placeholder="Search User">
                             </label>
-                            <label>
+                            <label class="searchUsersForm__label--fav">
                                 <img v-if="searchFriends == true" src="./images/fav-red-icon.png" alt="fav-red-icon" class="fav-icon-red userOnline__icon" @Click="filterFriends()">
 
                                 <img v-else src="./images/fav-def-icon.png" alt="fav-def-icon" class="fav-icon-def userOnline__icon" @Click="filterFriends()">

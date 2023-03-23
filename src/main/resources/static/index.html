@@ -22,6 +22,7 @@
         <main>
             <form v-if="showLogInForm == true" id="login-form" class="index-form contenedor" ref="login-form">
     
+                <legend class="index-form__legend">Log in to your account</legend>
                 <label class="index-form__label">Email
                     <input type="email" v-model="loginEmail" placeholder="example@email.com" @keydown.enter.prevent="login()" @blur="checkLoginEmail()" @mouseenter="resetLoginEmailError()">
                     <p class="index-form-error"> 
@@ -42,6 +43,7 @@
             </form>
 
             <form v-else id="register-form" class="index-form contenedor" ref="signup-form">
+                <legend class="index-form__legend">Sign up</legend>
                 <label class="index-form__label">NickName
                     <input type="text" v-model="registerNick" placeholder="Your Nickname" @keydown.enter.prevent="register()" @blur="checkRegisterNick()" @mouseenter="resetRegisterNickError()">
                     <p class="index-form-error"> 

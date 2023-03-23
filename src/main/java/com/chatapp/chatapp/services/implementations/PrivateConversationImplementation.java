@@ -63,8 +63,9 @@ public class PrivateConversationImplementation implements PrivateConversationSer
         PrivateConversationDto privateConversationDto = new PrivateConversationDto(privateConversation
         );
 
+
         privateConversationDto.setReceiverNick(receiver.getNickName());
-            return new PrivateConversationDto(privateConversation) ;
+            return privateConversationDto;
 
 
 
