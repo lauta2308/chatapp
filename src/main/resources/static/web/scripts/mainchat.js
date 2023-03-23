@@ -18,6 +18,7 @@ createApp({
         displayPrivateChat: false,
         receiverId: "",
         receiverNick: "",
+        messageColor: "",
         newGeneralMessage: false,
         privateChatArray: {},
         privateChatDisplayed: [] //messages
@@ -26,14 +27,14 @@ createApp({
       }},
       created(){
      
-        setInterval(this.getCurrentClient, 1000);
+        this.getCurrentClient();
+  
         setInterval(this.getClientPrivateChats, 1000);
       
         setInterval(this.getGeneralChat, 1000);
         
         setInterval(this.getOnlineClients, 1000);
-        this.testPrivateChat();
-        
+      
         
    
 
@@ -81,8 +82,13 @@ createApp({
           axios.get('/api/clients/current').then(response => {
           
             this.clientLogged = response.data;
-       
-  
+            console.log(this.clientLogged);
+            if(this.clientLogged.lastMessageColor !== null){
+              this.mainChatMessageColor(this.clientLogged.lastMessageColor);
+            } else {
+              this.mainChatMessageColor("Blue");
+            }
+            
 
          
 
@@ -136,15 +142,8 @@ createApp({
           })},
 
 
-          testPrivateChat(){
-            axios.get('/api/clients/current/getprivatechat' , {
-              params: { receiverId: 1}
-            }
-            
-            ).then(response => {
-  
-
-            })
+          test(){
+            console.log("hi");
 
           },
 
@@ -220,6 +219,24 @@ createApp({
           this.scrollChatToView();
        
         },
+
+        mainChatMessageColor(color){
+          console.log(color);
+          this.messageColor = color;
+
+          messageColorsArray = [this.$refs.messageColorRED, this.$refs.messageColorBLUE, this.$refs.messageColorYELLOW, this.$refs.messageColorGREEN, this.$refs.messageColorBROWN, this.$refs.messageColorORANGE, this.$refs.messageColorTEAL, this.$refs.messageColorGREY];
+
+
+          messageColorsArray.forEach(element => element.style.border = "unset");
+        
+          
+          let ref = `messageColor${color}`
+
+          this.$refs[ref].style.border = "3px solid black";
+       
+
+    
+        },
         getGeneralChat(){
           axios.get('/api/general').then(response => {
       
@@ -242,7 +259,7 @@ createApp({
              
             }
 
-        
+            console.log(this.generalChat);
 
     
         }).then(response => {
@@ -377,10 +394,15 @@ createApp({
 
             sendGeneralMessage(){
             
-        
-            
+                let color;
+                if(this.messageColor.length === 0){
+                  color = 'BLUE';
+                } else {
+                  color = this.messageColor;
+                }
+               
   
-                axios.post('/api/general', `message=${this.userMessage}`).then(response => {
+                axios.post('/api/general', `message=${this.userMessage}&messageColor=${color}`).then(response => {
     
     
                     this.userMessage = ""
@@ -410,6 +432,7 @@ createApp({
       },
       computed: {
      
+
            
       
 

@@ -16,22 +16,26 @@ public class GeneralChat {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
-    private String message;
-
-    private LocalDateTime messageDate;
-
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id")
     private Client client;
 
+    private LocalDateTime messageDate;
+
+
+    private MessageColor messageColor;
+
+    private String message;
+
+
     public GeneralChat() {
     }
 
-    public GeneralChat(String message, LocalDateTime messageDate, Client client) {
+    public GeneralChat(String message, LocalDateTime messageDate, Client client, MessageColor messageColor) {
         this.message = message;
         this.messageDate = messageDate;
         this.client = client;
+        this.messageColor = messageColor;
     }
 
 

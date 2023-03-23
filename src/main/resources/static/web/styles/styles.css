@@ -206,6 +206,7 @@ p {
     background-color: red;
 }
 
+
 .textColor__blue {
     background-color: blue;
 }
@@ -233,6 +234,45 @@ p {
 .textColor__grey {
     background-color: grey;
 }
+
+
+
+
+
+.RED {
+    
+    color: red;
+}
+
+.BLUE {
+    color: blue;
+}
+
+.YELLOW {
+    color: yellow;
+}
+
+.GREEN {
+    color: green;
+}
+
+.BROWN {
+    color: brown;
+}
+
+.ORANGE {
+    color: orange;
+}
+
+.TEAL {
+    color: teal;
+}
+
+.GREY {
+    color: grey;
+}
+
+
 
 .top-bar__user {
     flex-basis: 10%;
@@ -357,7 +397,7 @@ background-color: green;
 
 .main-chat-messages {
     flex-basis: calc(70% - 2rem);
-    background-color: blue;
+    background-color: black;
     height: 100%;
 
     display: flex;

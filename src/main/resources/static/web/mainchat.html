@@ -30,16 +30,16 @@
             <div class="top-bar__settings">
                 <a href="#">Settings</a>
             </div>
-            <div class="top-bar__color--container">
+            <div class="top-bar__color--container" ref="messageColorContainer">
   
-                <div class="textColor__red selectColor"></div>
-                <div class="textColor__blue selectColor"></div>
-                <div class="textColor__yellow selectColor"></div>
-                <div class="textColor__green selectColor"></div>
-                <div class="textColor__brown selectColor"></div>
-                <div class="textColor__orange selectColor"></div>
-                <div class="textColor__teal selectColor"></div>
-                <div class="textColor__grey selectColor"></div>
+                <button class="textColor__red selectColor" @click.prevent="mainChatMessageColor('RED')" ref="messageColorRED"></button>
+                <button class="textColor__blue selectColor" @click.prevent="mainChatMessageColor('BLUE')" ref="messageColorBLUE"></button>
+                <button class="textColor__yellow selectColor" @click.prevent="mainChatMessageColor('YELLOW')" ref="messageColorYELLOW"></button>
+                <button class="textColor__green selectColor" @click.prevent="mainChatMessageColor('GREEN')" ref="messageColorGREEN"></button>
+                <button class="textColor__brown selectColor" @click.prevent="mainChatMessageColor('BROWN')" ref="messageColorBROWN"></button>
+                <button class="textColor__orange selectColor" @click.prevent="mainChatMessageColor('ORANGE')" ref="messageColorORANGE"></button>
+                <button class="textColor__teal selectColor" @click.prevent="mainChatMessageColor('TEAL')" ref="messageColorTEAL"></button>
+                <button class="textColor__grey selectColor" @click.prevent="mainChatMessageColor('GREY')" ref="messageColorGREY"></button>
             </div>
             <div class="top-bar__user" @mouseenter="showUserList()" @mouseleave="hideUserList()">
                 <a class="top-bar__user--nick">{{clientLogged.nickName}}</a>
@@ -100,10 +100,9 @@
                 </div>
 
                 <div v-else class="mainChatMessages">
-
-           
+                   
                 
-                    <div v-for="message in generalChat" class="mainChatMessage">
+                    <div v-for="message in generalChat" class="mainChatMessage" :class="message.messageColor">
                         <p class="mainChatMessage__messageDate">{{message.messageDate}}</p>
                         <p class="mainChatMessage__messageNick">{{message.nickName}}: </p>
                

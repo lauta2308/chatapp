@@ -87,15 +87,15 @@ public class ChatappApplication {
 			client10.setClientStatus(ClientStatus.OFFLINE);
 			clientRepository.save(client10);
 
-			GeneralChat generalChat1 = new GeneralChat("first message!", LocalDateTime.now(),  client1);
+			GeneralChat generalChat1 = new GeneralChat("first message!", LocalDateTime.now(),  client1, MessageColor.BLUE);
 
 			generalChatRepository.save(generalChat1);
 
-			GeneralChat generalChat2 = new GeneralChat("hi", LocalDateTime.now(),  client1);
+			GeneralChat generalChat2 = new GeneralChat("hi", LocalDateTime.now(),  client1, MessageColor.GREEN);
 
 			generalChatRepository.save(generalChat2);
 
-			GeneralChat generalChat3 = new GeneralChat("all good", LocalDateTime.now(),  client2);
+			GeneralChat generalChat3 = new GeneralChat("all good", LocalDateTime.now(),  client2, MessageColor.BLUE);
 
 			generalChatRepository.save(generalChat3);
 

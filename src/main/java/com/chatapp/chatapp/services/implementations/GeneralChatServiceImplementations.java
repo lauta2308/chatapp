@@ -3,6 +3,7 @@ package com.chatapp.chatapp.services.implementations;
 import com.chatapp.chatapp.Dto.GeneralChatDto;
 import com.chatapp.chatapp.models.Client;
 import com.chatapp.chatapp.models.GeneralChat;
+import com.chatapp.chatapp.models.MessageColor;
 import com.chatapp.chatapp.repositories.ClientRepository;
 import com.chatapp.chatapp.repositories.GeneralChatRepository;
 import com.chatapp.chatapp.services.GeneralChatService;
@@ -29,15 +30,16 @@ public class GeneralChatServiceImplementations implements GeneralChatService {
     }
 
     @Override
-    public ResponseEntity<Object> addMessage(Authentication authentication, String message) {
+    public ResponseEntity<Object> addMessage(Authentication authentication, String message, MessageColor messageColor) {
         Client client = clientRepository.findByEmail(authentication.getName());
-        GeneralChat generalChat1 = new GeneralChat(message, LocalDateTime.now(), client);
+        GeneralChat generalChat1 = new GeneralChat(message, LocalDateTime.now(), client, messageColor);
 
+        client.setLastMessageColor(messageColor);
         clientRepository.save(client);
 
         generalChatRepository.save(generalChat1);
 
-        return new ResponseEntity<>("Message added", HttpStatus.CREATED);
+        return new ResponseEntity<>("Message sent", HttpStatus.CREATED);
     }
 
 

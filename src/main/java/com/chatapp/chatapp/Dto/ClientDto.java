@@ -3,6 +3,7 @@ package com.chatapp.chatapp.Dto;
 import com.chatapp.chatapp.models.Client;
 import com.chatapp.chatapp.models.ClientRol;
 import com.chatapp.chatapp.models.ClientStatus;
+import com.chatapp.chatapp.models.MessageColor;
 import lombok.Data;
 
 import java.util.Set;
@@ -23,6 +24,8 @@ public class ClientDto {
 
     private Set<GeneralChatDto> generalMessages;
 
+    private MessageColor lastMessageColor;
+
     private ClientStatus clientStatus;
 
 
@@ -34,6 +37,7 @@ public class ClientDto {
         this.generalMessages = client.getGeneralMessages().stream().map(message -> new GeneralChatDto(message)).collect(Collectors.toSet());
         this.clientRol = client.getClientRol();
         this.privateConversations = client.getPrivateConversations().stream().map(privateConversation -> new PrivateConversationDto(privateConversation)).collect(Collectors.toSet());
+        this.lastMessageColor = client.getLastMessageColor();
         this.clientStatus = client.getClientStatus();
     }
 

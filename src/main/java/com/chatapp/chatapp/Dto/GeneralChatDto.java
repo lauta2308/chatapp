@@ -1,6 +1,7 @@
 package com.chatapp.chatapp.Dto;
 
 import com.chatapp.chatapp.models.GeneralChat;
+import com.chatapp.chatapp.models.MessageColor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ public class GeneralChatDto {
 
     private LocalDateTime messageDate;
 
-
+    private MessageColor messageColor;
 
     public GeneralChatDto() {
     }
@@ -25,6 +26,7 @@ public class GeneralChatDto {
         this.nickName = generalChat.getClient().getNickName();
         this.message = generalChat.getMessage();
         this.messageDate = generalChat.getMessageDate();
+        this.messageColor = generalChat.getMessageColor();
     }
 
 

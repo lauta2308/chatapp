@@ -40,6 +40,8 @@ public class Client {
 
     private ClientStatus clientStatus;
 
+    private MessageColor lastMessageColor;
+
 
     public Client() {
     }

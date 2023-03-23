@@ -1,6 +1,7 @@
 package com.chatapp.chatapp.controllers;
 
 import com.chatapp.chatapp.Dto.GeneralChatDto;
+import com.chatapp.chatapp.models.MessageColor;
 import com.chatapp.chatapp.services.GeneralChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,8 @@ public class GeneralChatController {
 
 
     @PostMapping("/api/general")
-    public ResponseEntity<Object> addGeneralMessage(Authentication authentication, @RequestParam String message){
+    public ResponseEntity<Object> addGeneralMessage(Authentication authentication, @RequestParam String message, @RequestParam MessageColor messageColor){
 
-        return generalChatService.addMessage(authentication, message);
+        return generalChatService.addMessage(authentication, message, messageColor);
     }
 }
