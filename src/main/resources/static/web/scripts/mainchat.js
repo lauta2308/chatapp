@@ -60,6 +60,7 @@ createApp({
 
         showNickForm(){
           this.$refs.nickForm.style.display = "flex";
+          this.newNickName = "";
         },
         hideNickForm(){
           this.$refs.nickForm.style.display = "none";

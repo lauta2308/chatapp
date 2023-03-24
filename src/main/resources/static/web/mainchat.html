@@ -21,6 +21,7 @@
                     <input type="text" placeholder="New nick..." v-model="newNickName" class="nick-form-input">
                 </label>
                 <button type="submit" @click.prevent="changeNickName" class="nick-form-button">SAVE</button>
+                <button @click.prevent="hideNickForm" class="nick-form-button textColor__red">CANCEL</button>
             </form>
         </div>
 
