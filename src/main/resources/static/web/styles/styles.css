@@ -237,7 +237,9 @@ p {
 
 
 
-
+#enableMainBg{
+    background-image: url(../background/background.png)
+}
 
 .RED {
     
@@ -354,10 +356,11 @@ background-color: green;
     height: 100%;
     overflow-x: hidden;
     overflow-y:auto;
+    border: 1px solid red;
 }
 
 .userChat {
-    background-color: purple;
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -390,16 +393,16 @@ background-color: green;
     justify-content: space-between;
     align-items: center;
     
-    background-color: red;
+
     overflow-x: hidden;
     overflow-y:auto;
 }
 
 .main-chat-messages {
     flex-basis: calc(70% - 2rem);
-    background-color: black;
+ 
     height: 100%;
-
+    border: 1px solid red;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -480,7 +483,7 @@ background-color: green;
 
 .main-chat-aside {
     flex-basis: 15%;
-    background-color: orange;
+   border: 1px solid red;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -531,7 +534,7 @@ background-color: green;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: grey;
+  
     padding: 1rem;
     
 }

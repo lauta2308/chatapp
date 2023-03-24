@@ -10,18 +10,32 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
-<body>
+<body >
 
-    <div id="app">
+    <div id="app" >
 
         <div class="new-nick-container" ref="nickForm"  @focusout="hideNickForm"
         tabindex="0">
-            <form class="nick-form">
+            <form class="nick-form" >
                 <label>
                     <input type="text" placeholder="New nick..." v-model="newNickName" class="nick-form-input">
                 </label>
                 <button type="submit" @click.prevent="changeNickName" class="nick-form-button">SAVE</button>
                 <button @click.prevent="hideNickForm" class="nick-form-button textColor__red">CANCEL</button>
+            </form>
+        </div>
+
+        <div class="settings-container">
+            <form>
+            <legend>Enable background image</legend>
+               <label>
+                <input type="radio" name="bgImage" value="enable" @click="settings('enablebg')">Enable
+                
+               </label>
+               <label>
+                <input type="radio" name="bgImage" value="disable" @click="settings('disablebg')">Disable
+               </label>
+              
             </form>
         </div>
 
@@ -57,7 +71,8 @@
         </header>
 
 
-        <main class="main-chat-mainContent">
+    
+        <main class="main-chat-mainContent" ref="main" id="enableMainBg">
         
 
             

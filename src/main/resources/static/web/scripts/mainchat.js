@@ -49,6 +49,17 @@ createApp({
               })
           })
         },
+        settings(param){
+            console.log(param);
+            if(param === "enablebg"){
+              this.$refs.main.id = "enableMainBg";
+            } else {
+              this.$refs.main.id = "";
+            }
+            console.log(this.$refs.main.id)
+          
+        },
+
         showUserList(){
 
           this.$refs.userList.style.display = "block";
@@ -233,7 +244,10 @@ createApp({
           
           let ref = `messageColor${color}`
 
-          this.$refs[ref].style.border = "3px solid black";
+    
+            this.$refs[ref].style.border = "3px solid black";
+          
+  
        
 
     
@@ -399,7 +413,7 @@ createApp({
                 if(this.messageColor.length === 0){
                   color = 'BLUE';
                 } else {
-                  color = this.messageColor;
+                  color = this.messageColor.toUpperCase();
                 }
                
   
