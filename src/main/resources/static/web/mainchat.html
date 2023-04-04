@@ -10,11 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
-<body class="theme-dark">
+<body class="theme">
 
     <div id="app" >
 
-        <div class="new-nick-container containerTheme container-dark" ref="nickForm"  @focusout="hideNickForm"
+        <div class="new-nick-container containerTheme " ref="nickForm"  @focusout="hideNickForm"
         tabindex="0">
             <form class="nick-form" >
                 <label>
@@ -65,9 +65,9 @@
                 <button class="textColor__teal selectColor" @click.prevent="mainChatMessageColor('TEAL')" ref="messageColorTEAL"></button>
                 <button class="textColor__grey selectColor" @click.prevent="mainChatMessageColor('GREY')" ref="messageColorGREY"></button>
             </div>
-            <div class="top-bar__user containerTheme container-dark" @mouseenter="showUserList()" @mouseleave="hideUserList()">
+            <div class="top-bar__user containerTheme" @mouseenter="showUserList()" @mouseleave="hideUserList()">
                 <a class="top-bar__user--nick">{{clientLogged.nickName}}</a>
-                <ul class="top-bar__user--list containerTheme container-dark" ref="userList">
+                <ul class="top-bar__user--list containerTheme" ref="userList">
                  
                     <li class="top-bar__user--list-item top-bar__user--changeNick" @click="showNickForm">Change Nick</li>
                     <li class="top-bar__user--list-item top-bar__user--logout" @click="logout">Log out</li>
@@ -87,12 +87,12 @@
             
             <div class="userChats">
                 <h2>Chats</h2>
-                <div class="userChat containerTheme container-dark" @Click="openMainChat">
+                <div class="userChat containerTheme" @Click="openMainChat">
                     <p class="userChat__nickName">Main Chat</p>
                 </div>
                 
                 <h3>Private Chats</h3>
-                <div v-for="chat in userPrivateChats" class="userChat container-dark" @Click="openPrivateChat(chat)">
+                <div v-for="chat in userPrivateChats" class="userChat containerTheme" @Click="openPrivateChat(chat)">
                  
                     <p  class="userChat__nickName">{{chat.receiverNick}}</p>
                     <p  v-if="chat.unreadMessages > 0" class="userChat__unreadMessages">{{chat.unreadMessages}}</p>
@@ -149,7 +149,7 @@
                         </label>
             
 
-                        <button class="main-chat-messageForm__textareaContainer__sendBtn btn-dark" type="submit" @Click.prevent="sendMessage" id="" >Send</button>
+                        <button class="main-chat-messageForm__textareaContainer__sendBtn btn-theme" type="submit" @Click.prevent="sendMessage" id="" >Send</button>
                     </div>
 
     
@@ -164,7 +164,7 @@
                         </label>
             
 
-                        <button href="#last_message"  class="main-chat-messageForm__textareaContainer__sendBtn btn-dark" type="submit" @Click.prevent="sendMessage"  id="">Send</button>
+                        <button href="#last_message"  class="main-chat-messageForm__textareaContainer__sendBtn btn-theme" type="submit" @Click.prevent="sendMessage"  id="">Send</button>
                     </div>
 
 
@@ -204,7 +204,7 @@
                         </form>
                     </div>
                     <h2>Online</h2>
-                    <div v-for="client in clientsOnline" class="containerTheme container-dark">
+                    <div v-for="client in clientsOnline" class="containerTheme ">
             
 
                         <div v-if="client.clientStatus == 'ONLINE'" class="userOnline">
@@ -248,7 +248,7 @@
                 </div>
 
                 <h2>Offline</h2>
-                <div v-for="client in clientsOnline" class="containerTheme container-dark">
+                <div v-for="client in clientsOnline" class="containerTheme ">
             
 
                     <div  v-if="client.clientStatus == 'OFFLINE'" class="userOnline">

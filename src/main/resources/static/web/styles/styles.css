@@ -19,33 +19,6 @@ html {
 }
 
 
-.theme-dark {
-    background-color: #0B2447;
-   
-  
-}
-
-.theme-pastel {
-    background-color: #BBD6B8;
-}
-
-.container-dark {
-    background-color: #19376D;
-
-}
-
-.container-pastel {
-    background-color: #94AF9F;
-}
-
-.btn-dark {
-    background-color: #576CBC;
-    color: var(--color-white);
-}
-
-.btn-pastel {
-    background-color: #AEC2B6;
-}
 body {
     font-size: 1.6rem;
     box-sizing: inherit;

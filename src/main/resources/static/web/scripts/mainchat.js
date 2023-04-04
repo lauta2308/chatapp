@@ -51,18 +51,46 @@ createApp({
         },
         theme(param){
             console.log(param);
-            let themes;
-             let containerTheme;
-            let btnTheme;
+            let themes = document.getElementsByClassName('theme');
+             let containerTheme = document.getElementsByClassName('containerTheme');
+            let btnTheme = document.getElementsByClassName("btn-theme");
 
             switch(param){
              case 'dark':
-                 themes = document.getElementsByClassName('theme-dark');
+            
                  for(item of themes){
-                  item.setAttribute("class","theme-dark")
+                  item.style.backgroundColor = '#0B2447';
              
                 }
-                containerTheme = document.getElementsByClassName('containerTheme');
+            
+                for(item of containerTheme){
+                  item.style.backgroundColor = "#19376D";
+                }
+
+                
+                for(item of btnTheme){
+                  item.style.backgroundColor = "#576CBC";
+                }
+                break;
+
+                case 'pastel':
+
+                for(item of themes){
+                  item.style.backgroundColor = "#BBD6B8";
+              
+             
+                }
+            
+                for(item of containerTheme){
+                  item.style.backgroundColor = "#94AF9F";
+                }
+
+                
+                for(item of btnTheme){
+                  item.style.backgroundColor = "#AEC2B6";
+                }
+                break;
+
              }
           
              console.log(themes);
