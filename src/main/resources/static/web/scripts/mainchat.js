@@ -26,6 +26,13 @@ createApp({
 
       }},
       created(){
+        let theme = LocalStorage.getItem("theme");
+
+        if(theme){
+          this.theme(theme);
+        } else {
+          this.theme("dark");
+        }
      
         this.getCurrentClient();
   
@@ -60,11 +67,13 @@ createApp({
             
                  for(item of themes){
                   item.style.backgroundColor = '#0B2447';
+                  item.style.color = "white";
              
                 }
             
                 for(item of containerTheme){
                   item.style.backgroundColor = "#19376D";
+                  item.style.color = "white";
                 }
 
                 
@@ -75,14 +84,18 @@ createApp({
 
                 case 'pastel':
 
+                
+
                 for(item of themes){
                   item.style.backgroundColor = "#BBD6B8";
-              
+                  item.style.color = "black";
              
                 }
             
                 for(item of containerTheme){
                   item.style.backgroundColor = "#94AF9F";
+                  item.style.color = "black";
+                  
                 }
 
                 
@@ -92,8 +105,10 @@ createApp({
                 break;
 
              }
+
+             localStorage.setItem("theme", param);
           
-             console.log(themes);
+             
           
         },
 
