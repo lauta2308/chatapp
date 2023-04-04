@@ -49,14 +49,23 @@ createApp({
               })
           })
         },
-        settings(param){
+        theme(param){
             console.log(param);
-            if(param === "enablebg"){
-              this.$refs.main.id = "enableMainBg";
-            } else {
-              this.$refs.main.id = "";
-            }
-            console.log(this.$refs.main.id)
+            let themes;
+             let containerTheme;
+            let btnTheme;
+
+            switch(param){
+             case 'dark':
+                 themes = document.getElementsByClassName('theme-dark');
+                 for(item of themes){
+                  item.setAttribute("class","theme-dark")
+             
+                }
+                containerTheme = document.getElementsByClassName('containerTheme');
+             }
+          
+             console.log(themes);
           
         },
 

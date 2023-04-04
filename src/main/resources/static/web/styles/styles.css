@@ -12,22 +12,50 @@ html {
     padding: 0;
 }
 
+:root {
+    --color-white: white;
+    --color-blue: blue;
 
+}
+
+
+.theme-dark {
+    background-color: #0B2447;
+   
+  
+}
+
+.theme-pastel {
+    background-color: #BBD6B8;
+}
+
+.container-dark {
+    background-color: #19376D;
+
+}
+
+.container-pastel {
+    background-color: #94AF9F;
+}
+
+.btn-dark {
+    background-color: #576CBC;
+    color: var(--color-white);
+}
+
+.btn-pastel {
+    background-color: #AEC2B6;
+}
 body {
     font-size: 1.6rem;
     box-sizing: inherit;
     color: white;
-    background-color: rgb(77, 75, 75);
     font-family: 'PT Serif', sans-serif;
+   
 }
 
 
-/* #app {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-} */
+
 
 .contenedor {
     margin: 0 auto;
@@ -151,6 +179,7 @@ p {
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
+
 }
 
 
@@ -237,9 +266,6 @@ p {
 
 
 
-#enableMainBg{
-    background-image: url(../background/background.png)
-}
 
 .RED {
     
@@ -279,7 +305,7 @@ p {
 .top-bar__user {
     flex-basis: 10%;
 text-align: center;
-background-color: orange;
+
 
 
 }
@@ -293,7 +319,7 @@ background-color: orange;
     display: none;
     list-style: none;
     position: absolute;
-    background-color: green;
+   
     
 
 
@@ -303,7 +329,7 @@ background-color: orange;
 
 padding: 2rem;
 
-background-color: green;
+
 
   
 }
@@ -318,7 +344,6 @@ background-color: green;
     right: 50%;
     top: 50%;
     bottom: 50%;
-    background-color: orange;
     
     flex-direction: column;
     align-items: center;
@@ -332,7 +357,6 @@ background-color: green;
     display: flex;
     justify-content: center;
     gap: 1rem;
-    background-color: red;
 }
 
 .nick-form-input {
@@ -356,7 +380,7 @@ background-color: green;
     height: 100%;
     overflow-x: hidden;
     overflow-y:auto;
-    border: 1px solid red;
+
 }
 
 .userChat {
@@ -367,12 +391,15 @@ background-color: green;
     padding: 1rem;
     gap: .5rem;
     text-align: center;
+  
 
 }
 
 .userChat__nickName {
     text-align: center;
     flex-basis: 80%;
+    
+
 }
 
 .userChat:hover {
@@ -402,7 +429,7 @@ background-color: green;
     flex-basis: calc(70% - 2rem);
  
     height: 100%;
-    border: 1px solid red;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -467,8 +494,8 @@ background-color: green;
 }
 
 .main-chat-messageForm__textareaContainer__sendBtn {
-    background-color: blue;
-    color: white;
+
+   
     padding: 2rem;
 
 }
@@ -483,7 +510,7 @@ background-color: green;
 
 .main-chat-aside {
     flex-basis: 15%;
-   border: 1px solid red;
+
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -537,6 +564,7 @@ background-color: green;
   
     padding: 1rem;
     
+    
 }
 
 
@@ -558,5 +586,6 @@ background-color: green;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
  
 }

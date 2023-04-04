@@ -2,11 +2,11 @@ package com.chatapp.chatapp.services.implementations;
 
 
 import com.chatapp.chatapp.Dto.PrivateConversationDto;
-import com.chatapp.chatapp.models.*;
+import com.chatapp.chatapp.models.Client;
+import com.chatapp.chatapp.models.PrivateConversation;
 import com.chatapp.chatapp.repositories.ClientRepository;
 import com.chatapp.chatapp.repositories.PrivateConversationRepository;
 import com.chatapp.chatapp.repositories.PrivateMessageRepository;
-import com.chatapp.chatapp.services.ClientService;
 import com.chatapp.chatapp.services.PrivateConversationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

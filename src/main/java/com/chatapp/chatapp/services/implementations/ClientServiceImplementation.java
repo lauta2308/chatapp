@@ -1,11 +1,10 @@
 package com.chatapp.chatapp.services.implementations;
 
-import com.chatapp.chatapp.Dto.ClientDto;
 import com.chatapp.chatapp.Dto.ChatClients;
+import com.chatapp.chatapp.Dto.ClientDto;
 import com.chatapp.chatapp.Dto.PrivateConversationDto;
 import com.chatapp.chatapp.models.Client;
 import com.chatapp.chatapp.models.ClientStatus;
-import com.chatapp.chatapp.models.Friend;
 import com.chatapp.chatapp.models.FriendStatus;
 import com.chatapp.chatapp.repositories.ClientRepository;
 import com.chatapp.chatapp.services.ClientService;
@@ -17,9 +16,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class ClientServiceImplementation implements ClientService {
