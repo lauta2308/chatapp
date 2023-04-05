@@ -113,6 +113,9 @@ createApp({
            
               
       
+          }).catch(response => {
+            this.errorLogin = "Invalid data, review the fields and retry";
+          
           })
           }
         
