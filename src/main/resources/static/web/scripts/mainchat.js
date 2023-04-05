@@ -73,6 +73,7 @@ createApp({
             let themes = document.getElementsByClassName('theme');
              let containerTheme = document.getElementsByClassName('containerTheme');
             let btnTheme = document.getElementsByClassName("btn-theme");
+         
 
             switch(param){
              case 'dark':
@@ -92,6 +93,8 @@ createApp({
                 for(item of btnTheme){
                   item.style.backgroundColor = "#576CBC";
                 }
+
+                
                 break;
 
                 case 'light':
@@ -114,6 +117,7 @@ createApp({
                 for(item of btnTheme){
                   item.style.backgroundColor = "#AEC2B6";
                 }
+            
                 break;
 
              }

@@ -80,7 +80,7 @@ h4 {
 a {
     font-size: 2rem;
     text-decoration: none;
-    color: white;
+
 }
 
 p {
@@ -93,6 +93,11 @@ p {
 
 
 /************* INDEX *********************/
+
+.login-body {
+    background-color: grey;
+}
+
 .index-form {
     max-width: 30rem;
     display: flex;
@@ -144,6 +149,11 @@ p {
     color: red;
 }
 
+.login-anchor {
+    color: white;
+    text-decoration:underline;
+}
+
 /************* MAIN PAGE *********************/
 
 #app {
@@ -181,17 +191,31 @@ p {
 }
 
 .top-bar__settings {
-
-    flex-basis: 10%;
+    text-align: center;
+    flex-basis: 15%;
+    border: 1px solid black;
 }
 
+.top-bar__settings:hover {
+    cursor: pointer;
+}
+
+.themes-form__fieldset {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.themes-form__fieldset label input {
+    margin: 10px;
+}
 
 .top-bar__color--container {
-    flex-basis: 80%;
+    flex-basis: 75%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: .5rem;
+
 
 }
 
@@ -278,7 +302,8 @@ p {
 .top-bar__user {
     flex-basis: 10%;
 text-align: center;
-
+background-color: orange;
+border: 1px solid black;
 
 
 }
@@ -288,11 +313,13 @@ text-align: center;
 
 }
 
+
+
 .top-bar__user--list {
     display: none;
     list-style: none;
     position: absolute;
-   
+    margin-top: 1px;
     
 
 
@@ -301,7 +328,7 @@ text-align: center;
 .top-bar__user--list-item {
 
 padding: 2rem;
-
+border: 1px solid black;
 
 
   
@@ -316,8 +343,6 @@ padding: 2rem;
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-   
-    
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -562,4 +587,12 @@ padding: 2rem;
     align-items: center;
 
  
+}
+
+
+
+/************* FOOTER *************/
+
+.copy {
+    text-align: center;
 }

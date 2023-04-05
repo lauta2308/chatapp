@@ -27,27 +27,28 @@
             </form>
         </div>
 
-        <div class="settings-container">
-            <form>
-            <legend>Themes</legend>
-               <label>
-                <input type="radio" name="theme" value="dark" @click="theme('dark')" ref="dark">Dark
-                
-               </label>
-
-               <label>
-                <input type="radio" name="theme" value="pastel" @click="theme('light')" ref="light">Light
-               </label>
-               
-              
-            </form>
-        </div>
+    
 
         <header class="header">
-           <div class="top-bar">
+           <div class="top-bar containerTheme">
 
-            <div class="top-bar__settings">
-                <a href="#">Settings</a>
+            <div class="top-bar__settings ">
+                <form>
+                    <legend>Themes</legend>
+                    <fieldset class="themes-form__fieldset">
+                        <label>
+                            <input type="radio" name="theme" value="dark" @click="theme('dark')" ref="dark">Dark
+                            
+                           </label>
+            
+                           <label>
+                            <input type="radio" name="theme" value="pastel" @click="theme('light')" ref="light">Light
+                           </label>
+                           
+                    </fieldset>
+                      
+                      
+                    </form>
             </div>
             <div class="top-bar__color--container" ref="messageColorContainer">
   
@@ -80,7 +81,7 @@
         
 
             
-            <div class="userChats">
+            <div class="userChats containerTheme">
                 <h2>Chats</h2>
                 <div class="userChat containerTheme" @Click="openMainChat">
                     <p class="userChat__nickName">Main Chat</p>
@@ -173,7 +174,7 @@
 
             
            
-            <aside class="main-chat-aside">
+            <aside class="main-chat-aside containerTheme">
              
                 <div class="usersOnlineContainer">
                     {{searchUser}}
@@ -199,7 +200,7 @@
                         </form>
                     </div>
                     <h2>Online</h2>
-                    <div v-for="client in clientsOnline" class="containerTheme ">
+                    <div v-for="client in clientsOnline">
             
 
                         <div v-if="client.clientStatus == 'ONLINE'" class="userOnline">
@@ -217,7 +218,7 @@
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                     <path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
                                   </svg>
-                                <!-- <img v-else src="./images/fav-def-icon.png" alt="fav-def-icon" class="fav-icon-def userOnline__icon" @click="addFriend(client.id)"> -->
+                             
                            
                     
                                  
@@ -243,7 +244,7 @@
                 </div>
 
                 <h2>Offline</h2>
-                <div v-for="client in clientsOnline" class="containerTheme ">
+                <div v-for="client in clientsOnline">
             
 
                     <div  v-if="client.clientStatus == 'OFFLINE'" class="userOnline">
@@ -284,8 +285,8 @@
             
         </main>
 
-        <footer class="footer">
-            <p>Chat app</p>
+        <footer class="footer containerTheme">
+            <p class="copy">Chat app developed by Lautaro Yosbere &copy; 2023</p>
         </footer>
       
 

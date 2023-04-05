@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./web/styles/styles.css">
 </head>
-<body>
+<body class="login-body">
 
     <div id="app">
         <header>
@@ -39,7 +39,7 @@
     
                 <p class="index-form-error">{{errorLogin}}</p>
                 <a @click.prevent="login()" class="index-form__btn">Login</a>
-                <p href="#">Not user? <a href="#" @click.prevent="displaySignUpForm()">Sign up</a> </p>
+                <p href="#">Not user? <a href="#" @click.prevent="displaySignUpForm()" class="login-anchor">Sign up</a> </p>
             </form>
 
             <form v-else id="register-form" class="index-form contenedor" ref="signup-form">
@@ -66,12 +66,12 @@
                 <p class="index-form-error">{{errorLogin}}</p>
                 <a @click.prevent="register()" class="index-form__btn">Register</a>
                 
-                <p href="#">Already user? <a href="#" @click.prevent="displayLogInForm()">Log in</a> </p>
+                <p href="#">Already user? <a href="#" @click.prevent="displayLogInForm()" class="login-anchor">Log in</a> </p>
             </form>
         </main>
 
-        <footer>
-
+        <footer class="footer containerTheme">
+            <p class="copy">Chat app developed by Lautaro Yosbere &copy; 2023</p>
         </footer>
     </div>
    
@@ -81,4 +81,5 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="./web/scripts/main.js"></script>
+
 </html>
