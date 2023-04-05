@@ -26,13 +26,7 @@ createApp({
 
       }},
       created(){
-        let theme = LocalStorage.getItem("theme");
-
-        if(theme){
-          this.theme(theme);
-        } else {
-          this.theme("dark");
-        }
+      
      
         this.getCurrentClient();
   
@@ -42,9 +36,27 @@ createApp({
         
         setInterval(this.getOnlineClients, 1000);
       
-        
-   
 
+        setTimeout(() => {
+          let theme = localStorage.getItem("theme");
+
+          if(theme){
+            this.theme(theme);
+          } else {
+            this.theme("dark");
+          }
+
+          let fontColor = localStorage.getItem("fontColor");
+
+          console.log(fontColor);
+          this.mainChatMessageColor(fontColor);
+    
+          
+
+  
+        }, "3000");
+        
+       
       },
       methods: {
         logout(){
@@ -82,7 +94,7 @@ createApp({
                 }
                 break;
 
-                case 'pastel':
+                case 'light':
 
                 
 
@@ -106,6 +118,8 @@ createApp({
 
              }
 
+             this.$refs[param].checked = true;
+
              localStorage.setItem("theme", param);
           
              
@@ -127,6 +141,7 @@ createApp({
         },
         hideNickForm(){
           this.$refs.nickForm.style.display = "none";
+          this.getCurrentClient();
         },
 
         changeNickName(){
@@ -136,7 +151,7 @@ createApp({
 
             axios.patch('/api/clients/current/nickname', `nickName=${this.newNickName}`).then(response => {
                 console.log("name changed...")
-              
+                this.hideNickForm();
     
             })
           }
@@ -287,6 +302,9 @@ createApp({
         mainChatMessageColor(color){
           console.log(color);
           this.messageColor = color;
+
+        
+          localStorage.setItem("fontColor", this.messageColor.toUpperCase());
 
           messageColorsArray = [this.$refs.messageColorRED, this.$refs.messageColorBLUE, this.$refs.messageColorYELLOW, this.$refs.messageColorGREEN, this.$refs.messageColorBROWN, this.$refs.messageColorORANGE, this.$refs.messageColorTEAL, this.$refs.messageColorGREY];
 
@@ -468,6 +486,7 @@ createApp({
                   color = this.messageColor.toUpperCase();
                 }
                
+                
   
                 axios.post('/api/general', `message=${this.userMessage}&messageColor=${color}`).then(response => {
     
@@ -505,6 +524,10 @@ createApp({
 
 
       
+      },
+
+      mounted() {
+
       }
     
     }).mount('#app')

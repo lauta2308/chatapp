@@ -14,9 +14,11 @@
 
     <div id="app" >
 
-        <div class="new-nick-container containerTheme " ref="nickForm"  @focusout="hideNickForm"
+        <div class="new-nick-container containerTheme " ref="nickForm"
         tabindex="0">
+        <h2>Change NickName</h2>
             <form class="nick-form" >
+              
                 <label>
                     <input type="text" placeholder="New nick..." v-model="newNickName" class="nick-form-input">
                 </label>
@@ -29,12 +31,12 @@
             <form>
             <legend>Themes</legend>
                <label>
-                <input type="radio" name="theme" value="dark" @click="theme('dark')">Dark
+                <input type="radio" name="theme" value="dark" @click="theme('dark')" ref="dark">Dark
                 
                </label>
 
                <label>
-                <input type="radio" name="theme" value="pastel" @click="theme('pastel')">Light
+                <input type="radio" name="theme" value="pastel" @click="theme('light')" ref="light">Light
                </label>
                
               
