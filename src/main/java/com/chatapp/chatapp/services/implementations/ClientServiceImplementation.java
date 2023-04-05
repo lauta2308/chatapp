@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,6 +50,39 @@ public class ClientServiceImplementation implements ClientService {
 
     @Override
     public ResponseEntity<Object> registerClient(String nickName, String email, String password) {
+        if(nickName.isEmpty() || email.isEmpty() || password.isEmpty()){
+            return new ResponseEntity<>("Missing data, complete all the fields", HttpStatus.FORBIDDEN);
+        }
+        
+        Client checkClientEmail = clientRepository.findByEmail(email);
+
+        if(checkClientEmail != null){
+            return new ResponseEntity<>("Email already registered", HttpStatus.FORBIDDEN);
+        }
+
+        if (!email.contains("@")) {
+            return new ResponseEntity<>("Email should contain @", HttpStatus.FORBIDDEN);
+        }
+
+        // ReGex to check if a string
+        // contains uppercase, lowercase
+        // special character & numeric value
+        String regex = "^(?=.*[a-z])(?=."
+                + "*[A-Z])(?=.*\\d)"
+                + "(?=.*[-+_!@#$%^&*., ?]).+$";
+
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+
+        // Find match between given string
+        // & regular expression
+        Matcher m = p.matcher(password);
+        
+     if (password.length() < 8 || !m.matches()){
+            return new ResponseEntity<>("Password length should be 8 with Uppercase, LowerCase, numbers and simbols", HttpStatus.FORBIDDEN);
+        }
+
+
         Client client = new Client(nickName, email, passwordEncoder.encode(password));
         clientRepository.save(client);
         return new ResponseEntity<>("User created", HttpStatus.CREATED);
@@ -153,12 +188,17 @@ public class ClientServiceImplementation implements ClientService {
 
         if(clientAuth == null){
             return new ResponseEntity<>("User not found", HttpStatus.FORBIDDEN);
+        } else if (nickName.isEmpty()) {
+            return new ResponseEntity<>("Missing data, complete all the fields", HttpStatus.FORBIDDEN);
+
+        } else{
+            clientAuth.setNickName(nickName);
+            clientRepository.save(clientAuth);
+            return new ResponseEntity<>("NickName changed", HttpStatus.CREATED);
         }
 
-        
-        clientAuth.setNickName(nickName);
-        clientRepository.save(clientAuth);
-        return new ResponseEntity<>("NickName changed", HttpStatus.CREATED);
+
+
 
 
     }

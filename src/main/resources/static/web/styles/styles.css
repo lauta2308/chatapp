@@ -146,7 +146,8 @@ p {
 
 .index-form-error {
 
-    color: red;
+    background-color: red;
+    color: white;
 }
 
 .login-anchor {

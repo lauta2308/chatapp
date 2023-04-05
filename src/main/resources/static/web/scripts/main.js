@@ -136,6 +136,9 @@ createApp({
         
                   
           
+              }).catch(response => {
+                this.errorLogin = response.response.data;
+              
               })
               }
 
