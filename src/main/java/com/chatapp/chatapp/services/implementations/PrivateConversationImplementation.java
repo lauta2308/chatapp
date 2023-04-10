@@ -34,6 +34,10 @@ public class PrivateConversationImplementation implements PrivateConversationSer
 
     @Override
     public ResponseEntity<Object> checkprivatechat(Authentication authentication, long receiverId) {
+
+        if(receiverId <= 0){
+            return new ResponseEntity<>("Id not valid", HttpStatus.NOT_ACCEPTABLE);
+        }
         Client clientAuth = clientRepository.findByEmail(authentication.getName());
         Client receiverClient = clientRepository.findById(receiverId).get();
         if(clientAuth.getId() == receiverId){
@@ -52,6 +56,7 @@ public class PrivateConversationImplementation implements PrivateConversationSer
 
     @Override
     public PrivateConversationDto getPrivateConversation(Authentication authentication, long receiverId) {
+
         Client clientAuth = clientRepository.findByEmail(authentication.getName());
         Client receiver = clientRepository.findById(receiverId).get();
 
